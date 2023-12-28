@@ -1,0 +1,24 @@
+.adminLayout_wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--dim-bg);
+}
+
+.adminLayout_container {
+    width: 100%;
+    display: flex;
+}
+
+.adminLayout_sideBar {
+    width: 15%;
+    position: fixed;
+    background-color: var(--primary);
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+.adminLayout_content {
+    width: 85%;
+    height: fit-content;
+    margin-left: 15%;
+    /* background-color: var(--dim-bg); */
+}

@@ -1,0 +1,159 @@
+.heroContainer {
+    height: 100vh;
+    position: relative;
+}
+
+.heroContainer img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(70%);
+    object-fit: cover;
+}
+
+.heroContent {
+    position: absolute;
+    color: white;
+    bottom: 40%;
+    left: 40%;
+    z-index: 1;
+    /* font-size: 40px; */
+    line-height: 20px;
+}
+
+
+.heroContent a {
+    text-decoration: none;
+}
+
+
+.heroContent h4 {
+    /* font-size: 40px; */
+    font-size: 30px;
+}
+
+.heroContent h1 {
+    /* font-size: 90px; */
+    font-size: 60px;
+    padding: 15px 0px;
+}
+
+.heroContactWrapper {
+    font-size: 14px;
+}
+
+.heroContactWrapper h4 {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.heroContactWrapper h4:first-child {
+    margin-left: 0px;
+}
+
+.heroContactWrapper h4:last-child {
+    margin-right: 0px;
+}
+
+.heroContact {
+    position: absolute;
+    color: white;
+    z-index: 1;
+    left: 6%;
+    bottom: 10px;
+    display: flex;
+}
+
+.heroContact svg {
+    font-size: 20px;
+    margin: -5px 5px;
+}
+
+.heroSocial {
+    position: absolute;
+    color: white;
+    z-index: 1;
+    right: 6%;
+    bottom: 0px;
+    display: flex;
+}
+
+.heroSocial svg {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 40px;
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.heroSocial svg:hover {
+    background-color: var(--primary);
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.heroSocial a {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.heroSocial a:first-child {
+    margin-left: 0px;
+}
+
+.heroSocial a:last-child {
+    margin-right: 0px;
+}
+
+
+
+.goBTN {
+    background-color: white;
+    color: black;
+    width: fit-content;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.goBTN:hover {
+    background-color: var(--primary);
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 640px) {
+    .heroContent h4 {
+        font-size: 5vw;
+    }
+
+    .heroContent h1 {
+        /* font-size: 14vw; */
+        font-size: 8vw;
+    }
+
+    .heroSocial {
+        right: auto;
+        left: 6%;
+        bottom: 50px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .heroContactWrapper h4 {
+        margin: 10px 0px;
+    }
+
+    .heroContact {
+        display: grid;
+    }
+
+    .heroSocial {
+        bottom: 90px;
+    }
+}

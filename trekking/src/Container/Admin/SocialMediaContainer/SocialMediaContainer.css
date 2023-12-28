@@ -1,0 +1,56 @@
+.socialMediaA_wrapper {
+    width: 100%;
+}
+
+.socialMediaA_container {
+    /* width: 90%; */
+    width: 100%;
+    margin: auto;
+}
+
+.socialMediaA_content {
+    width: 100%;
+    margin: 20px 0px;
+    display: grid;
+}
+
+.smac_item {
+    /* width: 50%; */
+    width: 100%;
+    display: inline-flex;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px 0px;
+    font-size: 14px;
+}
+
+.smac_itemLeft {
+    width: calc(10% - 40px);
+    padding: 12px 20px;
+    /* background-color: red; */
+}
+
+.smac_itemMid {
+    width: calc(82% - 40px);
+    padding: 12px 20px;
+    /* background-color: green; */
+}
+
+.smac_itemRight {
+    width: calc(8% - 0px);
+    padding: 5px 0px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 0px 20px 20px 0px;
+    /* background-color: red; */
+}
+
+.smac_itemRight:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.smac_itemRight svg {
+    margin: auto;
+    padding-top: 5px;
+}

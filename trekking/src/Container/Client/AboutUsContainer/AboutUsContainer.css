@@ -1,0 +1,90 @@
+.aboutUs_wrapper {
+    width: 100%;
+    background-color: white;
+}
+
+.aboutUs_container {
+    width: 100%;
+    padding: 60px 60px;
+}
+
+.aboutUs_title {
+    text-align: center;
+}
+
+.aboutUs_title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    margin-top: 0px;
+}
+
+.aboutUs_content {
+    width: 100%;
+    display: flex;
+}
+
+.aboutUs_details {
+    width: 100%;
+    padding-right: 40px;
+    text-align: justify;
+    line-height: 1.5rem;
+    font-size: 14px;
+    /* background-color: red; */
+}
+
+.aboutUs_details h4 {
+    margin-bottom: 2px;
+}
+
+.quickInquiry {
+    width: 25%;
+    /* margin: 0px 0px 0px auto; */
+    /* background-color: blue; */
+}
+
+@media (max-width: 1280px) {
+    .aboutUs_container {
+        width: calc(100% - 60px);
+        padding: 60px 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .aboutUs_content {
+        width: 100%;
+        display: block;
+    }
+
+    .aboutUs_details {
+        width: calc(100% - 10px);
+        padding: 0px 5px;
+        text-align: justify;
+        line-height: 1.5rem;
+        font-size: 14px;
+        /* background-color: red; */
+    }
+
+    .quickInquiry {
+        width: 60%;
+        margin: 50px auto;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .quickInquiry {
+        width: 80%;
+    }
+}
+
+@media (max-width: 400px) {
+    .aboutUs_container {
+        width: calc(100% - 20px);
+        padding: 30px 10px;
+    }
+
+    .quickInquiry {
+        width: 100%;
+    }
+}

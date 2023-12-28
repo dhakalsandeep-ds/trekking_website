@@ -1,0 +1,11 @@
+.pageNotFound_wrapper {
+    width: 100%;
+    height: 40vh;
+    text-align: center;
+    transform: translate(0%, 50%);
+}
+
+.pageNotFound_wrapper h1 {
+    font-family: 'Oswald', sans-serif;
+    margin: 0px;
+}

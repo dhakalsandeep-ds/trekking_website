@@ -1,0 +1,45 @@
+.class1 {
+    color: #4B5563;
+}
+
+.testimonial_container {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.testimonial_quoteSVG {
+    display: inline-block;
+    /* margin-bottom: 2rem; */
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #9CA3AF;
+}
+
+.testimonial_content {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    line-height: 1.625;
+}
+
+.testimonial_line {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 0.25rem;
+    background-color: var(--primary);
+}
+
+.testimonial_fullname {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #111827;
+}
+
+.testimonial_position {
+    color: #6B7280;
+}

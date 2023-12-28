@@ -1,0 +1,74 @@
+/* Contact Info */
+.iwdInfo {
+    display: flex;
+    margin: 50px 0px;
+    width: 100%;
+}
+
+.iwdInfo_logo {
+    width: 10%;
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+    /* background-color: red; */
+}
+
+.iwdInfo_logo svg {
+    cursor: default;
+}
+
+.iwdInfo_details {
+    width: 90%;
+    /* background-color: blue; */
+}
+
+.iwdInfo_static {
+    font-weight: bold;
+}
+
+/* big */
+.iwdInfoB {
+    display: flex;
+    margin: 50px 0px;
+    width: 250px;
+}
+
+.widthbig {
+    width: 300px;
+}
+
+.iwdInfo_logoB {
+    width: 25%;
+    font-size: 38px;
+    margin: auto;
+    text-align: center;
+    /* background-color: red; */
+}
+
+.iwdInfo_logoB svg {
+    cursor: default;
+}
+
+.iwdInfo_detailsB {
+    width: 75%;
+    /* background-color: blue; */
+}
+
+.iwdInfo_staticB {
+    font-size: 14px;
+}
+
+.iwdInfo_dynamicB {
+    font-weight: bold;
+}
+
+
+@media (max-width: 400px) {
+    .iwdInfo_logo {
+        width: 16%;
+    }
+
+    .iwdInfo_details {
+        width: 94%;
+    }
+}

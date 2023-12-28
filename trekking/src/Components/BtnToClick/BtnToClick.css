@@ -1,0 +1,70 @@
+a {
+    text-decoration: none;
+}
+
+.baseBTN {
+    background-color: var(--primary);
+    color: white;
+    font-size: 12px;
+    width: auto;
+    margin: 10px 0px;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.baseBTN:hover {
+    background-color: var(--primary);
+    color: white;
+    background-color: black;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.successBTN {
+    background-color: #28a745;
+    color: white;
+    font-size: 12px;
+    width: auto;
+    margin: 10px 0px;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.successBTN:hover {
+    background-color: #218838;
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.deleteBTN {
+    background-color: #dc3545;
+    color: white;
+    font-size: 12px;
+    width: auto;
+    margin: 10px 0px;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.deleteBTN:hover {
+    background-color: #C82333;
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}

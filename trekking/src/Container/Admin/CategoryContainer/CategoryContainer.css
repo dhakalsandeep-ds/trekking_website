@@ -1,0 +1,63 @@
+.categoryA_wrapper {
+    width: 100%;
+}
+
+.categoryA_container {
+    width: 90%;
+    margin: auto;
+}
+
+.categoryA_content {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.categoryA_content table {
+    width: 100%;
+    text-align: left;
+    background-color: white;
+}
+
+.categoryA_content table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--primary);
+    color: white;
+}
+
+.categoryA_content table td, .categoryA_content table th {
+    /* border: 1px solid #ddd; */
+    padding: 8px;
+}
+
+.categoryA_content table tr:nth-child(even) {
+    background-color: var(--dim-bg);
+}
+
+.categoryA_content table tr:hover {
+    background-color: #ddd;
+}
+
+.categoryA_content table td svg {
+    font-size: 20px;
+    margin: 0px 10px;
+}
+
+.categoryA_content table td svg:first-child:hover {
+    color: green;
+}
+
+.categoryA_content table td svg:last-child:hover {
+    color: red;
+}
+
+#modalInput input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: 16px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid var(--dim-bg);
+    color: black;
+}

@@ -1,0 +1,69 @@
+.css-1ib02b2 {
+    transition: all 0.5s;
+}
+
+.quickInquiry_wrapper {
+    /* width: 300px; */
+    width: 100%;
+}
+
+.quickInquiry_container {
+    width: calc(100% - 50px);
+    background-color: var(--dim-bg);
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin: 20px auto;
+}
+
+.quickInquiry_container h3 {
+    text-align: center;
+    font-weight: bold;
+    /* font-family: 'Oswald', sans-serif; */
+}
+
+.quickInquiry_container input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid var(--dim-bg);
+    color: black;
+}
+
+.quickInquiry_container textarea {
+    width: calc(100% - 20px);
+    height: 80px;
+    padding: 8px 10px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid var(--dim-bg);
+    color: black;
+}
+
+.quickInquiry_container .goBTN {
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    width: calc(100% - 80px);
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.quickInquiry_container .goBTN:hover {
+    background-color: var(--primary);
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 700px) {
+    .css-1ib02b2 {
+        width: 90% !important;
+        padding: 20px 0px !important;
+    }
+}

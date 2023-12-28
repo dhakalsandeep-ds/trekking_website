@@ -1,0 +1,105 @@
+.adminSidebar_wrapper {
+    width: 100%;
+    height: 100vh;
+}
+
+.adminSidebar_container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.adminSidebar_logo {
+    width: 150px;
+    /* height: 80px; */
+    margin: auto;
+    padding: 20px 0px;
+    /* background-color: brown; */
+}
+
+.adminSidebar_logo img {
+    width: 100%;
+    height: auto;
+}
+
+.adminSidebar_menus {
+    width: 100%;
+}
+
+.adminSidebar_menus ul {
+    list-style: none;
+    padding: 0;
+}
+
+.adminSidebar_menus ul a {
+    text-decoration: none;
+}
+
+.adminSidebar_menus ul li svg {
+    font-size: 18px;
+    width: 20%;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.adminSidebar_menus ul li span {
+    margin: auto;
+    width: 80%;
+}
+
+.adminSidebar_menus ul li {
+    color: white;
+    width: calc(100% - 60px);
+    font-size: 12px;
+    display: flex;
+    padding: 12px 30px;
+}
+
+.adminSidebar_menus ul li:hover {
+    background-color: white;
+    color: black;
+}
+
+.adminSidebar_menus ul .active li {
+    background-color: var(--dim-bg);
+    color: black;
+    font-weight: bold;
+}
+
+.adminSidebar_userAction {
+    width: 100%;
+    display: flex;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    background-color: #4661E2;
+}
+
+.adminSidebar_userAction .adminSidebar_uA_left {
+    width: calc(70% - 60px);
+    padding: 0px 30px;
+    /* background-color: orange; */
+}
+
+.adminSidebar_userAction .adminSidebar_uA_left h4 {
+    margin: 10px 0px 5px 0px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.adminSidebar_userAction .adminSidebar_uA_left h5 {
+    margin: 5px 0px 10px 0px;
+    font-weight: 200;
+}
+
+.adminSidebar_userAction .adminSidebar_uA_right {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    font-size: 24px;
+    /* background-color: red; */
+}
+
+.adminSidebar_userAction .adminSidebar_uA_right svg:hover {
+    color: #93344A;
+}

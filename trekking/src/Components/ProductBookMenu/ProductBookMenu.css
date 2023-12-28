@@ -1,0 +1,194 @@
+.productBookMenu_wrapper {
+    width: 100%;
+    background-color: var(--dim-bg);
+    border-radius: 10px;
+}
+
+.productBookMenu_container {
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.productBookMenu_costing {
+    width: 100%;
+    /* padding: 10px 0px; */
+    display: flex;
+}
+
+.productBookMenu_costing .pBMc_icon {
+    width: 20%;
+    /* background-color: red; */
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    font-size: 30px;
+}
+
+.productBookMenu_costing .pBMc_icon svg {
+    margin-top: 10px;
+}
+
+.productBookMenu_costing .pBMc_info {
+    width: 80%;
+    /* background-color: blue; */
+}
+
+.productBookMenu_costing .pBMc_info span {
+    font-size: 14px;
+}
+
+.productBookMenu_costing .pBMc_info h3 {
+    margin: 0px;
+    font-size: 24px;
+}
+
+.productBookMenu_detail {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.productBookMenu_detail h3 {
+    /* font-family: 'Oswald', sans-serif; */
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.productBookMenu_detail ul {
+    font-size: 12px;
+    padding-left: 22px;
+}
+
+.productBookMenu_detail ul li {
+    margin: 2px 0px;
+    font-weight: bold;
+}
+
+.productBookMenu_BTNs {
+    width: 100%;
+}
+
+.smallScreenInputs {
+    display: none;
+}
+
+.bigScreenInputs {
+    display: block;
+}
+
+#modalInput_client input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: 16px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid var(--dim-bg);
+    color: black;
+}
+
+#modalInput_client textarea {
+    width: calc(100% - 20px);
+    height: 100px;
+    padding: 8px 10px;
+    font-size: 16px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid var(--dim-bg);
+    color: black;
+}
+
+#modalInput_client .item span {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.modalInput_twoFlexBox {
+    width: 100%;
+    margin: 5px 0px;
+    display: flex;
+}
+
+.modalInput_twoFlexBox .item:first-child {
+    margin-right: 10px;
+    width: calc(50% - 10px);
+}
+
+.modalInput_twoFlexBox .item:last-child {
+    margin-left: 10px;
+    width: calc(50% - 10px);
+}
+
+.modalInput_threeFlexBox {
+    width: 100%;
+    margin: 5px 0px;
+    display: flex;
+}
+
+.modalInput_threeFlexBox .item {
+    width: calc(40% - 10px);
+    margin: 0px 5px;
+}
+
+.modalInput_threeFlexBox .item:first-child {
+    width: calc(20% - 5px);
+    margin-right: 5px;
+    margin-left: 0px;
+}
+
+.modalInput_threeFlexBox .item:last-child {
+    margin-right: 0px;
+}
+
+@media (max-width: 700px) and (min-width: 460px) {
+    .modalInput_container {
+        padding: 0px 20px;
+    }
+
+    .modalInput_twoFlexBox {
+        width: 100%;
+        margin: 5px 0px;
+        display: block;
+    }
+
+    .modalInput_twoFlexBox .item:first-child {
+        margin-right: 0px;
+        width: 100%;
+    }
+
+    .modalInput_twoFlexBox .item:last-child {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 460px) {
+    .modalInput_container {
+        padding: 0px 20px;
+    }
+
+    .smallScreenInputs {
+        display: block;
+    }
+
+    .bigScreenInputs {
+        display: none;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .modalInput_container {
+        padding: 0px 20px;
+    }
+
+    .smallScreenInputs {
+        display: block;
+    }
+
+    .bigScreenInputs {
+        display: none;
+    }
+
+}

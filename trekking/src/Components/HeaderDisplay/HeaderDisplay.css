@@ -1,0 +1,114 @@
+.headerDisplay_wrapper {
+    width: 100%;
+}
+
+.headerDisplay_container {
+    width: 100%;
+    /* height: 200px; */
+    height: 280px;
+    background-color: var(--primary);
+    position: relative;
+}
+
+.headerDisplay_container h1 {
+    margin: 0px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 45px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.headerDisplay_imgContainer {
+    width: 100%;
+    /* height: 200px; */
+    height: 340px;
+    background-color: var(--primary);
+    position: relative;
+    text-align: left;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.headerDisplay_imgContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.headerDisplay_imgContainer h1 {
+    margin: 0px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 55px;
+    position: absolute;
+    /* if slug is on */
+    /* bottom: 60px; */
+    bottom: 30px;
+    left: 80px;
+    /* transform: translate(-50%, 0%); */
+}
+
+.headerDisplay_imgContainer h2 {
+    margin: 0px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    position: absolute;
+    font-size: 30px;
+    /* if slug is on */
+    /* bottom: 134px; */
+    bottom: 110px;
+    left: 80px;
+    /* transform: translate(-50%, 0%); */
+}
+
+.headerDisplay_imgContainer h4 {
+    margin: 0px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    position: absolute;
+    font-size: 12px;
+    bottom: 30px;
+    left: 80px;
+    /* transform: translate(-50%, 0%); */
+}
+
+
+
+@media (max-width: 800px) {
+    .headerDisplay_imgContainer h1 {
+        font-size: 7vw;
+        left: 40px;
+    }
+
+    .headerDisplay_imgContainer h2 {
+        font-size: 4vw;
+        left: 40px;
+        bottom: 100px;
+    }
+}
+
+
+@media (max-width: 560px) {
+    .headerDisplay_imgContainer h2 {
+        bottom: 80px;
+    }
+}
+
+@media (max-width: 400px) {
+    .headerDisplay_container h1 {
+        font-size: 10vw;
+    }
+
+    .headerDisplay_imgContainer h1 {
+        font-size: 36px;
+    }
+
+    .headerDisplay_imgContainer h2 {
+        font-size: 20px;
+        bottom: 140px;
+    }
+}

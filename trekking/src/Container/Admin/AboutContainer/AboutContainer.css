@@ -1,0 +1,30 @@
+.aboutA_wrapper {
+    width: 100%;
+}
+
+.aboutA_container {
+    width: 90%;
+    margin: auto;
+}
+
+.aboutA_content {
+    width: 100%;
+    margin: auto;
+}
+
+.viewAboutContent {
+    margin: 65px 0px 55px 10px;
+}
+
+.editAboutContent {
+    margin-bottom: 55px;
+}
+
+.aboutA_content .ck-editor__editable_inline {
+    min-height: 400px;
+}
+
+.aboutA_btn {
+    width: 20%;
+    /* margin: auto; */
+}

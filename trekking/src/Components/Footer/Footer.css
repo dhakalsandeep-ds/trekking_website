@@ -1,0 +1,158 @@
+.footer_wrapper {
+    background-color: var(--primary);
+    color: white;
+    width: 100%;
+}
+
+.footer_container {
+    width: calc(100% - 80px);
+    padding: 5px 40px;
+}
+
+.footerContact {
+    display: flex;
+    width: 95%;
+    padding: 40px 0px 20px 0px;
+    margin: auto;
+}
+
+.footerContactInfo {
+    width: 50%;
+}
+
+.footerContactInfo span {
+    margin: 0px 20px;
+    font-size: 14px;
+}
+
+.footerContactInfo span:first-child {
+    margin: 0px 20px 0px 0px;
+}
+
+.footerContactInfo span svg {
+    font-size: 20px;
+    margin: -5px 5px;
+}
+
+.footerSocialInfo {
+    width: 50%;
+    text-align: right;
+}
+
+.footerSocialInfo a {
+    margin: 0px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.footerSocialInfo a:last-child {
+    margin: 0px 0px 0px 20px;
+}
+
+.footerCompanyInfo {
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.footerCompanyLogo {
+    width: 140px;
+    margin: auto;
+}
+
+.footerCompanyLogo img {
+    width: 100%;
+}
+
+.footerCompanyDescription {
+    width: 90%;
+    margin: auto;
+}
+
+.footerCompanyDescription h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.625rem;
+}
+
+.footerCompanyAffiliated {
+    margin: 50px 0px;
+}
+
+.footerCompanyAffiliated h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+.footerCompanyAffiliatedList {
+    padding-top: 10px;
+}
+
+.footerCompanyAffiliatedList img {
+    margin: 0px 15px;
+    border-radius: 50px;
+    width: 45px;
+}
+
+.footerCopyright {
+    width: 100%;
+    text-align: center;
+}
+
+.footerCopyright h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .aboutUs_container {
+        width: calc(100%-60px);
+        padding: 60px 30px;
+    }
+
+    .footerContactInfo {
+        width: 70%;
+    }
+
+    .footerSocialInfo {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer_container {
+        width: calc(100% - 20px);
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .footerContact {
+        display: block;
+        padding: 40px 0px;
+    }
+
+    .footerContactInfo {
+        width: 100%;
+        padding: 0px 0px 20px 0px;
+        text-align: center;
+    }
+
+    .footerSocialInfo {
+        width: 100%;
+        padding: 20px 0px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .footerContactInfo {
+        display: grid;
+        row-gap: 20px;
+    }
+
+    .footerContactInfo span:first-child {
+        margin: 0px;
+    }
+}

@@ -1,0 +1,14 @@
+.titleAndData_wrapper {
+    width: 100%;
+    display: flex;
+    margin: 15px 0px;
+}
+
+.tad_title {
+    width: 25%;
+    font-weight: bold;
+}
+
+.tad_data {
+    width: 75%;
+}

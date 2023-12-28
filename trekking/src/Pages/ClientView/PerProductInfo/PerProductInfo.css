@@ -1,0 +1,23 @@
+.perProductInfo_wrapper {
+    background-color: white;
+    position: relative;
+}
+
+.adminEditBTN {
+    background-color: #007bff;
+    position: fixed;
+    font-size: 30px;
+    border-radius: 45px;
+    bottom: 20px;
+    padding: 10px 15px;
+    right: 40px;
+    color: white;
+}
+
+.adminEditBTN:hover {
+    background-color: #0069D9;
+}
+
+.adminEditBTN svg {
+    margin-top: 3px;
+}

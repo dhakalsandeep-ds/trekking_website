@@ -1,0 +1,89 @@
+.searchMenu_wrapper {
+    width: 100%;
+}
+
+.searchMenu_container {
+    display: inline-flex;
+    align-items: center;
+    width: 70%;
+    border-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+}
+
+.searchMenu_option1, .searchMenu_option2, .searchMenu_option3 {
+    width: 30%;
+    height: 100%;
+}
+
+.searchMenu_option1 select, .searchMenu_option2 select, .searchMenu_option3 select {
+    width: 60%;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid white;
+    font-weight: bold;
+    /* border-radius: 40px; */
+}
+
+.searchMenu_option1 select:focus, .searchMenu_option2 select:focus, .searchMenu_option3 select:focus {
+    border: 1px solid white;
+    outline: none;
+}
+
+
+.searchMenu_container .goBTN {
+    background-color: var(--primary);
+    color: white;
+    font-size: 12px;
+    width: fit-content;
+    height: 16px;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.searchMenu_container .goBTN:hover {
+    background-color: var(--primary);
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 1024px) {
+    .searchMenu_container {
+        display: inline-block;
+        width: 50%;
+        border-radius: 0px;
+        box-shadow: none;
+        background-color: var(--dim-bg);
+    }
+
+    .searchMenu_option1, .searchMenu_option2, .searchMenu_option3 {
+        width: 100%;
+        height: 100%;
+        margin: 15px 0px;
+        border-radius: 40px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color: white;
+    }
+
+    .searchMenu_option1 select, .searchMenu_option2 select, .searchMenu_option3 select {
+        width: 90%;
+        border-radius: 40px;
+        padding: 10px;
+    }
+
+    .searchMenu_container .goBTN {
+        width: auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .searchMenu_container {
+        width: 80%;
+    }
+}

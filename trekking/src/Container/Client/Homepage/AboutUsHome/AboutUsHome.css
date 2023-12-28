@@ -1,0 +1,93 @@
+.homeAboutUs_wrapper {
+    width: 100%;
+}
+
+.homeAboutUs_container {
+    display: flex;
+    width: 90%;
+    padding: 20px;
+    margin: auto;
+}
+
+.homeAboutUs_leftContainer {
+    width: 30%;
+    margin: auto;
+}
+
+.homeAboutUs_leftContainer h1 {
+    font-size: 36px;
+    font-weight: bold;
+    padding: 0px 20px 0px 0px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.homeAboutUs_rightContainer {
+    width: 70%;
+    padding: 20px 0px;
+}
+
+.homeAboutUs_rightContainer h3 {
+    text-align: justify;
+    font-size: 14px;
+    padding: 10px 20px 10px 0px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 0px;
+}
+
+.homeAboutUs_rightContainer a {
+    text-decoration: none;
+}
+
+.homeAboutUs_rightContainer a .goBTN {
+    background-color: var(--primary);
+    color: white;
+    font-size: 12px;
+    width: fit-content;
+    padding: 12px 40px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.homeAboutUs_rightContainer a .goBTN:hover {
+    background-color: var(--primary);
+    color: white;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 1024px) {
+    .homeAboutUs_container {
+        display: block;
+    }
+
+    .homeAboutUs_leftContainer {
+        width: 100%;
+        margin: auto;
+    }
+
+    .homeAboutUs_rightContainer {
+        width: 100%;
+        padding: 0px;
+    }
+}
+
+@media (max-width: 400px) {
+    .homeAboutUs_container {
+        display: block;
+        width: calc(100% - 40px);
+    }
+
+    .homeAboutUs_leftContainer {
+        width: 100%;
+        margin: auto;
+    }
+
+    .homeAboutUs_rightContainer {
+        width: 100%;
+        padding: 0px;
+    }
+}

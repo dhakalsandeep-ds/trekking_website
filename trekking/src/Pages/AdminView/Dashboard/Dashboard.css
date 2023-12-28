@@ -1,0 +1,23 @@
+.dashboard_wrapper {
+    width: 100%;
+}
+
+.dashboard_container {
+    width: 90%;
+    margin: auto;
+}
+
+.dash_contactInfo {
+    width: 100%;
+    display: flex;
+}
+
+.dashCI_left {
+    width: calc(50% - 15px);
+    margin-right: 15px;
+}
+
+.dashCI_right {
+    width: calc(50% - 15px);
+    margin-left: 15px;
+}

@@ -1,0 +1,37 @@
+.packageOffer_wrapper {
+    font-family: 'Oswald', sans-serif;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dim-bg);
+}
+
+.packageOffer_container {
+    padding: 40px 50px;
+    text-align: center;
+    /* background-color: red; */
+}
+
+.packageOffer_title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+}
+
+.packageOffer_searchBar {
+    margin: 0px 0px 40px 0px;
+}
+
+.packageOffer_collection {
+    width: 95%;
+    margin: auto;
+    padding: 20px 0px;
+}
+
+@media (max-width: 950px) {
+    .packageOffer_wrapper {
+        height: auto;
+    }
+
+    .react-multiple-carousel__arrow {
+        z-index: 9 !important;
+    }
+}

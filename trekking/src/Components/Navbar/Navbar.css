@@ -1,0 +1,251 @@
+svg {
+    cursor: pointer;
+}
+
+.NavDiv_wrapper {
+    width: 100%;
+    height: 100px;
+    /* background-color: red; */
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    position: fixed;
+    z-index: 10;
+    /* -webkit-transition: height 4s width 4s ease-in-out; */
+    transition: height 0.5s;
+}
+
+.NavDiv_bg {
+    background-color: var(--primary);
+    height: 55px;
+}
+
+.NavDivContainer {
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    /* background-color: green; */
+}
+
+.topLogoContainer {
+    width: 180px;
+    height: 140px;
+    display: flex;
+    transition: all 0.9s;
+}
+
+.logoContainer {
+    width: 78px;
+    height: 30px;
+    /* width: 100px; */
+    /* height: 90px; */
+    /* display: flex; */
+    /* background-color: var(--primary); */
+    /* border: 2px solid white; */
+    /* border-top: 2px solid var(--primary); */
+    /* transition: all 0.9s; */
+}
+
+.logoWrapper {
+    margin: auto;
+    /* padding: 5px; */
+    background: none;
+}
+
+.logoContainer .logoWrapper img, .topLogoContainer .logoWrapper img {
+    width: 100%;
+    background: none;
+}
+
+.serachContainer {
+    width: 25%;
+    margin: auto;
+    padding: 0px 30px;
+    font-size: 24px;
+    color: white;
+    transition: all 0.5s;
+}
+
+.NavLinkContainer {
+    width: calc(75% - 100px);
+    margin: auto;
+    /* background-color: violet; */
+}
+
+.NavLinkSubContainer {
+    display: flex;
+    float: right;
+}
+
+.NavLinkSubContainer li {
+    list-style-type: none;
+    margin: auto 3px;
+    text-decoration: none;
+}
+
+.NavLinkSubContainer li:first-child {
+    margin-left: 0px !important;
+}
+
+.NavLinkSubContainer li:last-child {
+    margin-right: 0px !important;
+}
+
+.Nav-li-textColor {
+    color: white;
+}
+
+.Nav-li-unselect {
+    color: var(--nav-unselect);
+}
+
+.NavLinkSubContainer li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    /* color: white; */
+}
+
+.NavLinkSubContainer li .active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.icon_res a {
+    color: White;
+    font-size: 30px;
+}
+
+.icon_res {
+    display: none;
+}
+
+
+@media (max-width: 1120px) {
+    .NavLinkSubContainer li a {
+        padding: 10px 16px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+
+    .NavDivContainer {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+
+    .logoContainer, .topLogoContainer {
+        position: absolute;
+        /* margin: auto; */
+        /* right: 0; */
+        left: 25px;
+        z-index: 2;
+    }
+
+    .NavDiv_bg .serachContainer {
+        width: 50%;
+        padding: 0px;
+        position: absolute;
+        /* left: 0; */
+        left: 150px;
+        top: 0px;
+        padding: 10px 0px;
+        z-index: 5;
+    }
+
+    .serachContainer {
+        width: 40%;
+        padding: 0px;
+        position: absolute;
+        /* left: 0; */
+        left: 200px;
+        top: 20px;
+        padding: 10px 0px;
+        z-index: 5;
+    }
+
+    .NavLinkContainer {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        /* padding: 10px 0px; */
+    }
+
+
+    .icon_res {
+        position: absolute;
+        display: block;
+        right: 0;
+        margin-right: 15px;
+        margin-top: 10px;
+        z-index: 11;
+    }
+
+    .NavLinkSubContainer {
+        display: block;
+        float: none;
+    }
+
+    .NavLinkSubContainer li {
+        display: none;
+    }
+
+    .responsiveNav {
+        position: relative;
+        padding: 5px 5px;
+        border-radius: 0px 0px 5px 5px;
+        background-color: var(--primary);
+        border-left: 1px solid var(--dim-bg);
+        /* -webkit-transition: height 4s width 4s ease-in-out; */
+        transition: all 0.2s;
+        width: 75%;
+        height: 100vh;
+        float: right;
+        z-index: 10;
+    }
+
+    .responsiveNav li {
+        display: block;
+        padding: 20px 0px;
+        margin: 0px;
+        text-align: center;
+    }
+
+    .responsiveNav li:first-child {
+        margin-top: 60px;
+        /* margin-left: 2px !important; */
+    }
+
+    .responsiveNav li:hover {
+        background-color: var(--dim-bg);
+        color: var(--primary);
+    }
+
+    .responsiveNav li:hover .active {
+        background-color: var(--dim-bg);
+        color: var(--primary);
+    }
+
+}
+
+@media (max-width: 600px) {
+    .searchBar .sb2 input {
+        padding: 5px 12px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .topLogoContainer {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        transition: all 0.9s;
+    }
+
+    .serachContainer {
+        display: none;
+    }
+}
