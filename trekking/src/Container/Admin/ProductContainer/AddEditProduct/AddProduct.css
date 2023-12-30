@@ -2,10 +2,11 @@
     width: 100%;
 } */
 
-.addProduct_container {
+/* keep it */
+/* .addProduct_container {
     width: 70%;
     margin:  auto;
-}
+} */
 
 /* .addProduct_content {
     width: 100%;
@@ -15,7 +16,7 @@
     text-decoration: none;
 } */
 
-#BtnToSubmit {
+/* #BtnToSubmit {
     background-color: var(--primary);
     color: white;
     border: none;
@@ -30,7 +31,7 @@
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
     width: 100%;
-}
+} */
 
 
 
@@ -179,3 +180,194 @@
 /* #apc_grade .apc_inputText, #apc_season .apc_inputText {
     width: 85%;
 } */
+
+/* this awesome */
+/* 
+.addProduct_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .addProduct_container {
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .addProduct_content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .form-group select,
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .divFlex {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #BtnToSubmit {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #BtnToSubmit:hover {
+    background-color: #45a049;
+  }
+   */
+
+
+   /* hh */
+   /* .addProduct_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .addProduct_container {
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .addProduct_content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .form-group select,
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; 
+  }
+  
+  .form-group input::placeholder {
+    color: #aaa;
+  }
+  
+  .divFlex {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #BtnToSubmit {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #BtnToSubmit:hover {
+    background-color: #45a049;
+  }
+   */
+
+
+   .addProduct_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .addProduct_container {
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .addProduct_content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .form-group select,
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #aaa;
+  }
+  
+  .divFlex {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #BtnToSubmit {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #BtnToSubmit:hover {
+    background-color: #45a049;
+  }
+  

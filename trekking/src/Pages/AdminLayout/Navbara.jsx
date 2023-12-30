@@ -8,7 +8,7 @@ import logos from "../../assets/travel-svgrepo-com.svg"
 import { AdminNavLinks } from "../../Data/AdminNavLinks";
 import { MdLogout, MdSegment } from "react-icons/md";
 import AuthContext from "../../AuthState";
-
+import { RxHamburgerMenu } from "react-icons/rx";
 export default function Navbara() {
   const {logout} = useContext(AuthContext)
   const [changeStyle, setChangeStyle] = useState(false);
@@ -54,7 +54,7 @@ export default function Navbara() {
           <div className="NavLinkContainer" >
             <div className="icon_res">
               <Link onClick={makeResponsive}>
-                <MdSegment />
+              <RxHamburgerMenu />
               </Link>
             </div>
             <div className="NavLinkSubContainer" style={{backgroundColor:"#154c79"}} id="NavLinkSubContainer">

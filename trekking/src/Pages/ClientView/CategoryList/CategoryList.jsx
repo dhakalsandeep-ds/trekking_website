@@ -7,7 +7,7 @@ import activityImage from "../../../assets/productList/5.jpeg"
 export default function CategoryList() {
   return (
     <>
-      <HeaderDisplay imgFile={activityImage} textonly={false} title="Activities" />
+      <HeaderDisplay imgFile={activityImage} textonly={false} title="Packages" />
       <PackageOffer/>
     </>
   );

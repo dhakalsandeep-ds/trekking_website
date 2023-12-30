@@ -4,29 +4,22 @@ export const Links = [
     Title: "HOME",
     Linkto: "/",
   },
-  // {
-  //   Key: 2,
-  //   Title: "TICKETING",
-  //   Linkto: "/ticketing",
-  // },
-  // {
-  //   Key: 3,
-  //   Title: "TREKKING",
-  //   Linkto: "/trekking",
-  // },
+
   {
     Key: 4,
-    Title: "ACTIVITIES",
-    Linkto: "/activities",
+    Title: "PACKAGES",
+    Linkto: "/packages",
   },
   {
     Key: 5,
+    Title: "ABOUT US",
+    Linkto: "/aboutus",
+  }
+  ,
+  {
+    Key: 6,
     Title: "CONTACT",
     Linkto: "/contact",
   },
-  {
-    Key: 6,
-    Title: "ABOUT US",
-    Linkto: "/aboutus",
-  },
+ 
 ];

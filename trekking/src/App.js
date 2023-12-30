@@ -43,7 +43,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/activities" element={<CategoryList />} />         
+          <Route path="/packages" element={<CategoryList />} />         
           <Route path="*" element={<PageNotFound />} />
         </Route>
 
@@ -56,16 +56,12 @@ function App() {
         <Route path="/admin" element={<PrivateRoute />}>
           <Route element={<AdminLayout></AdminLayout>}>
           <Route path="" element={<Dashboard />} />
-          <Route path="about" element={<About />} />
+       
           <Route path="category" element={<Category />} />
           <Route path="contact" element={<Contact />} />
           <Route path="products" element={<ProductDetails />} />
           <Route path="products/add" element={<AddProduct />} />
           <Route path="products/edit/:tripID" element={<EditProduct />} />
-          <Route path="booking" element={<BookingDetails />} />
-          <Route path="social" element={<SocialMediaDetails />} />
-          <Route path="reviews" element={<ProductReviewDetails />} />
-          <Route path="account" element={<AccountDetails />} />
           <Route path="inquiry" element={<Inquiry />} />
           </Route>
         </Route>
