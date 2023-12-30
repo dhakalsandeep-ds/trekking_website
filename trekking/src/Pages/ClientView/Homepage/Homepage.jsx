@@ -15,9 +15,9 @@ export default function Homepage() {
       
       
       <AboutUsHome id="AboutUs"/>
-      {/* <PackageOffer /> */}
-      {/* <PopularActivities /> */}
-      <Testimonial />
+
+      
+      <AboutUsHome istestiomonial={true}/>
     </div>
   );
 }

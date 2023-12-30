@@ -22,7 +22,8 @@ export default function ProductCard(props) {
               )}
             </div>
             <div className="productCard_duration">
-              <h4>{duration ? duration + " Days" : <br />}</h4>
+              <h4>{duration ? duration + " Days" : <br />} - Rs. 40  - autumn</h4>
+              
             </div>
           </div>
           <div className="productCard_shadow"></div>

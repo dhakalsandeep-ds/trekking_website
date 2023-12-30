@@ -10,7 +10,9 @@ import { inquirySchema } from "./inquirySchema.js";
 import { productSchema } from "./productSchema.js";
 import { contactSchema } from "./contactSchema.js";
 import { aboutSchema } from "./aboutSchema.js";
+import categorySchema from "./categorySchema.js";
 
+export let Category = model('Catgory',categorySchema)
 export let About = model("About",aboutSchema)
 export let Contact = model("Contact",contactSchema)
 export let Product = model("Product",productSchema)

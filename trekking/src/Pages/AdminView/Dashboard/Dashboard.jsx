@@ -10,12 +10,10 @@ export default function Dashboard() {
       <div className="dashboard_container">
         <h1>Admin : {username}</h1>
         <div className="dash_contactInfo">
-          <div className="dashCI_left">
+          
             <ContactContainer />
-          </div>
-          <div className="dashCI_right">
-            <SocialMediaContainer />
-          </div>
+          
+         
         </div>
       </div>
     </div>

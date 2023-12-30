@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
-import "./Navbar.css";
+import "./Navbara.css";
 import { Links } from "../../Data/NavLinks";
 import { Link, NavLink } from "react-router-dom";
 // import SearchBar from "../SearchBar/SearchBar";
 import logo from "../../assets/icon/logo_main.png";
 import logos from "../../assets/travel-svgrepo-com.svg"
 import { AdminNavLinks } from "../../Data/AdminNavLinks";
-import { MdLogout} from "react-icons/md";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { MdLogout, MdSegment } from "react-icons/md";
 import AuthContext from "../../AuthState";
 
-export default function Navbar() {
-  const {token,logout} = useContext(AuthContext)
+export default function Navbara() {
+  const {logout} = useContext(AuthContext)
   const [changeStyle, setChangeStyle] = useState(false);
   const changeColor = () => {
     if (window.scrollY >= 100) {
@@ -34,7 +33,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={"NavDiv_wrapper NavDiv_bg"} style={{backgroundColor:"#063970"}}
+        className={"NavDiv_wrapper NavDiv_bg"} style={{backgroundColor:"#154c79"}}
       >
         
         <div className="NavDivContainer">
@@ -51,23 +50,21 @@ export default function Navbar() {
             </div>
           </div>
 
-        
-
-          <div className="NavLinkContainer">
+       
+          <div className="NavLinkContainer" >
             <div className="icon_res">
               <Link onClick={makeResponsive}>
-              
-                <RxHamburgerMenu />
+                <MdSegment />
               </Link>
             </div>
-            <div className="NavLinkSubContainer" id="NavLinkSubContainer" style={{backgroundColor:"#063970"}}>
-              {Links.map((Link) => {
+            <div className="NavLinkSubContainer" style={{backgroundColor:"#154c79"}} id="NavLinkSubContainer">
+              {AdminNavLinks.map((Link) => {
                 return (
                   <li key={Link.Key}>
                     <NavLink
                       to={Link.Linkto}
                       className={
-                       "Nav-li-textColor "
+                        changeStyle ? "Nav-li-unselect" : "Nav-li-textColor "
                       }
                       onClick={() => {
                         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -80,14 +77,14 @@ export default function Navbar() {
                 );
               })}
                <li >
-                {token && <MdLogout
-                      onClick={logout}
-                      className={"Nav-li-textColor "
+                    <MdLogout
+                      
+                      className={
+                        changeStyle ? "Nav-li-unselect" : "Nav-li-textColor "
                       }
+                      onClick={logout}
                      
-                    />}
-                    
-                    
+                    />
                     
                   </li>
             </div>

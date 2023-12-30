@@ -13,21 +13,42 @@ export default function ContactContainer() {
   });
 
   const fetchContactData = async () => {
-    try {
-      const url = "/contact/1";
-      const result = await getAllData(url);
-      if (result.status === 200) {
-        setContactData({
-          contact_number: result.data.data.contact_number,
-          address: result.data.data.address,
-          email: result.data.data.email,
-        });
-      } else {
-        console.log(result);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+   
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+     }
+     
+     
+     
+     let response = await fetch("http://localhost:8000/contact", { 
+       method: "GET",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     console.log(data,"form contact conainer client");
+     setContactData({email:data.email,contact_number:data.phoneNumber,address:data.address})
+     
+
+
+
+
+    // try {
+    //   const url = "/contact/1";
+    //   const result = await getAllData(url);
+    //   if (result.status === 200) {
+    //     setContactData({
+    //       contact_number: result.data.data.contact_number,
+    //       address: result.data.data.address,
+    //       email: result.data.data.email,
+    //     });
+    //   } else {
+    //     console.log(result);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   useEffect(() => {

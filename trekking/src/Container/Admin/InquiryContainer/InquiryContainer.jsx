@@ -14,149 +14,125 @@ import {
 } from "../../../constants/apiService";
 import { toast } from "react-toastify";
 
-const viewStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "var(--dim-bg)",
-  borderRadius: "10px",
-  boxShadow: 24,
-  p: 4,
-};
-
-const deleteStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 300,
-  bgcolor: "var(--dim-bg)",
-  borderRadius: "10px",
-  boxShadow: 24,
-  p: 4,
-};
 
 export default function InquiryContainer() {
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
-  const [deleteId, setDeleteId] = useState("");
-  const [inquiryData, setInquiryData] = useState("");
-  const [soloInquiryData, setSoloInquiryData] = useState("");
 
+  const [inquiryData, setInquiryData] = useState([{name:"sandeep",email:"dhakalsandeep71@gmail.com",phone_number:123456789},{name:"sandeep",email:"dhakalsandeep71@gmail.com",phone_number:123456789}]);
+ 
   const fetchInquiryData = async () => {
-    try {
-      const url = "/inquiry";
-      const result = await getAllData(url);
-      if (result.status === 200) {
-        console.log(result.data.data.results);
-        setInquiryData(result.data.data.results);
-      } else {
-        toast.error("Some error occurred");
-        console.log("error", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+     }
+     
+    
+     try{
+     let response = await fetch("http://localhost:8000/inquiry", { 
+       method: "GET",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     console.log(data,".....................");
+     setInquiryData(data.data)
+    }catch(e){
+      console.log(e,"eroror")
     }
+
+   
   };
 
-  const fetchSoloInquiryData = async (inquiry_id) => {
-    try {
-      const url = "/inquiry/" + inquiry_id;
-      const result = await getAllData(url);
-      if (result.status === 200) {
-        console.log(result.data.data);
-        setSoloInquiryData(result.data.data);
-      } else {
-        toast.error("Some error occurred");
-        console.log("error", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
 
-  const updateSoloInquiryData = async (inquiry_id) => {
-    try {
-      const url = "/inquiry/" + inquiry_id;
-      const seenData = { seen: true };
-      const result = await updateData(url, seenData);
-      if (result.status === 200 || result.status === 201) {
-        console.log("seen", result);
-        toast.info("You have seen that Inquiry");
-        fetchInquiryData();
-        handleCloseEdit();
-      } else {
-        toast.error("Some error occurred");
-        console.log("error seen", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
-
-  const deleteSoloInquiryData = async (inquiry_id) => {
-    try {
-      const url = "/inquiry/" + inquiry_id;
-      const result = await deleteData(url);
-      if (result.status === 200) {
-        console.log("delete", result);
-        toast.warn("Customer Inquiry is deleted.");
-        fetchInquiryData();
-      } else {
-        toast.error("Some error occurred");
-        console.log("error", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     fetchInquiryData();
   }, []);
 
-  const handleOpenEdit = (id) => {
-    fetchSoloInquiryData(id);
-    setOpenEdit(true);
-  };
-  const handleCloseEdit = () => {
-    setSoloInquiryData("");
-    setOpenEdit(false);
+  const handleSeen = async(id) => {
+    let headersList = {
+      "Accept": "*/*",
+     }
+     try{
+     let response = await fetch(`http://localhost:8000/inquiry/toggleSeen/${id}`, { 
+       method: "POST",
+       headers: headersList,
+       body:JSON.stringify({})
+     });
+      
+     if(response.ok){
+      let data = await response.json();
+      setInquiryData((prev)=>prev.map(p=> p._id === id ? {...p,seen:!p.seen} : p))
+     }else{
+      console.log(response.status,response.statusText)
+     }
+
+     
+    
+    }catch(e){
+      console.log(e,"error ...........")
+    }
   };
 
-  const handleOpenDelete = (id) => {
-    setDeleteId(id);
-    setOpenDelete(true);
-  };
 
-  const handleCloseDelete = () => {
-    setDeleteId("");
-    setOpenDelete(false);
-  };
 
-  const onDelete = (id) => {
-    deleteSoloInquiryData(id);
-    handleCloseDelete();
+
+
+
+ 
+
+  const handleDelete = async (id) => {
+    let headersList = {
+      "Accept": "*/*",
+     }
+     try{
+     let response = await fetch(`http://localhost:8000/inquiry/${id}`, { 
+       method: "DELETE",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     console.log(data);
+     if(data.sucess === true){
+     
+      setInquiryData((prevInquiries) => {
+         console.log("heeeeeee")
+        return prevInquiries.filter((inquiry) => inquiry._id !== id)});
+         toast.success(data.message)
+     }else {
+      toast.error(data.message)
+     }
+     
+    }catch(e){
+         toast.error("something went wrong")
+    }
+
+    // Delete the inquiry with the given ID
+    // try {
+    //   const response = await axios.delete(`/api/inquiries/${id}`);
+    //   console.log(response.data.message);
+    //   // Remove the deleted inquiry from the state
+    //   setInquiries((prevInquiries) => prevInquiries.filter((inquiry) => inquiry._id !== id));
+    // } catch (error) {
+    //   console.error('Error deleting inquiry:', error);
+    // }
   };
 
   return (
     <div className="inquiryA_wrapper">
       <div className="inquiryA_container">
         <h1>Inquiries</h1>
-        <div className="inquiryA_content">
-          <table id="inquiryTable">
-            <tr>
+        <div className="inquiryA_content"  
+      
+        >
+          <table id="inquiryTable" style={{backgroundColor:"#154c79"}}>
+            <tr >
               <th width="5%">SN</th>
-              <th width="35%">Customer Name</th>
-              <th width="25%">Email</th>
+              <th width="20%">Customer Name</th>
+              <th width="20%">Email</th>
               <th width="20%">Contact Number</th>
-              <th width="15%">Action</th>
+              <th width="35%">message</th>
+              <th width="10%">Action</th>
             </tr>
             {Array.isArray(inquiryData) &&
               inquiryData.map((inquiry, i) => {
@@ -165,25 +141,26 @@ export default function InquiryContainer() {
                     <td>{i + 1}</td>
                     <td>{inquiry.name}</td>
                     <td>{inquiry.email}</td>
-                    <td>{inquiry.phone_number}</td>
+                    <td>{inquiry.contactNumber}</td>
+                    <td>{inquiry.message}</td>
                     <td>
                       {inquiry.seen ? (
                         <MdRemoveRedEye
                           onClick={() => {
-                            handleOpenEdit(inquiry.id);
+                            handleSeen(inquiry._id);
                           }}
                           style={{ color: "green" }}
                         />
                       ) : (
                         <MdRemoveRedEye
                           onClick={() => {
-                            handleOpenEdit(inquiry.id);
+                            handleSeen(inquiry._id);
                           }}
                         />
                       )}
                       <MdDelete
                         onClick={() => {
-                          handleOpenDelete(inquiry.id);
+                          handleDelete(inquiry._id);
                         }}
                       />
                     </td>
@@ -192,55 +169,7 @@ export default function InquiryContainer() {
               })}
           </table>
         </div>
-        {/* Edit Modal */}
-        <Modal
-          open={openEdit}
-          onClose={handleCloseEdit}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={viewStyle}>
-            <h2 id="modalTitle">Inquiry Detail</h2>
-            <div className="modalContents">
-              <TitleAndData title="Customer Name" data={soloInquiryData.name} />
-              <TitleAndData title="Email" data={soloInquiryData.email} />
-              <TitleAndData
-                title="Contact Number"
-                data={soloInquiryData.phone_number}
-              />
-              <TitleAndData title="Message" data={soloInquiryData.message} />
-            </div>
-            {soloInquiryData.seen ? (
-              ""
-            ) : (
-              <BtnToClick
-                title="Seen"
-                customColor="success"
-                onclicking={() => updateSoloInquiryData(soloInquiryData.id)}
-              />
-            )}
-          </Box>
-        </Modal>
-
-        {/* Delete Modal */}
-        <Modal
-          open={openDelete}
-          onClose={handleCloseDelete}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={deleteStyle}>
-            <h3>Are you sure want to delete this Inquiry Info?</h3>
-            <div
-              className="modalDeleteBTN"
-              onClick={() => {
-                onDelete(deleteId);
-              }}
-            >
-              <BtnToClick title="Delete" customColor="delete" />
-            </div>
-          </Box>
-        </Modal>
+        
       </div>
     </div>
   );

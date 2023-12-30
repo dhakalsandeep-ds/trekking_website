@@ -1,61 +1,39 @@
-.contactA_wrapper {
-    width: 100%;
-}
+.form-box {
+    min-width: 100%;
+    height: 100vh;
 
-.contactA_container {
-    /* width: 90%; */
-    width: 100%;
-    margin: auto;
-}
+    /* border: 1px solid red; */
+    margin: 0vw;
+    padding: 5vw;
+    position: relative;
+    /* position:relative for .prevBtn and .nextBtn position:absolute; */
+  }
 
-.contactA_content {
-    width: 100%;
-    margin: 20px 0px;
-}
+  .form-box h5 {
+    font-size: 35px;
+    text-align: center;
+    color: #f55a00;
+    margin: 0 0 0.5vh 0;
+  }  
 
-.cac_item {
-    /* width: 85%; */
-    width: 100%;
-    display: inline-flex;
-    background-color: white;
-    border-radius: 20px;
-    margin: 10px 0px;
-    font-size: 14px;
-}
-
-.cac_itemLeft {
-    /* width: calc(25% - 40px); */
-    width: calc(10% - 40px);
-    padding: 12px 20px;
-    /* background-color: red; */
-}
-
-.cac_itemLeft svg {
-    font-size: 16px;
-}
-
-.cac_itemMid {
-    /* width: calc(67% - 40px); */
-    width: calc(82% - 40px);
-    padding: 12px 20px;
-    /* background-color: green; */
-}
-
-.cac_itemRight {
-    width: calc(8% - 0px);
-    padding: 5px 0px;
+  .form-box label {
+    display: block;
     text-align: center;
     font-size: 20px;
-    border-radius: 0px 20px 20px 0px;
-    /* background-color: red; */
+    margin: 0 0 2vh 0;
+  }
+
+  .form-box input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.9vw 0;
+  border: 0;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
-.cac_itemRight:hover {
-    background-color: var(--primary);
-    color: white;
-}
-
-.cac_itemRight svg {
-    margin: auto;
-    padding-top: 5px;
+.form-box textarea {
+  height: 15vh;
 }

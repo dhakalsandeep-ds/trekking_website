@@ -4,8 +4,9 @@
 }
 
 .contactUs_container {
-    width: calc(100%-120px);
+    width: 70%;
     padding: 60px 60px;
+    margin:auto;
 }
 
 .contactUs_title {
@@ -21,6 +22,7 @@
 .contactUs_content {
     width: 100%;
     display: flex;
+    margin:auto;
 }
 
 .contactUs_details {

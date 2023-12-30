@@ -5,220 +5,233 @@ import HeaderDisplay from "../../../../Components/HeaderDisplay/HeaderDisplay";
 import { FaRegClock, FaCloudSun, FaDollarSign } from "react-icons/fa";
 import { MdDirectionsWalk } from "react-icons/md";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import BtnToClick from "../../../../Components/BtnToClick/BtnToClick";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  deleteData,
-  getAllData,
-  updateData,
-} from "../../../../constants/apiService";
 
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+
+
 import { toast } from "react-toastify";
+import ProductDetails from "../../../../Pages/AdminView/ProductDetails/ProductDetails";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "var(--dim-bg)",
-  borderRadius: "10px",
-  boxShadow: 24,
-  p: 4,
-};
+
+
 
 export default function EditProduct() {
-  const { tripID } = useParams();
-  const navigate = useNavigate();
-  const [categoryData, setCategoryData] = useState("");
-  const [editProductDetails, setEditProductDetails] = useState();
-  const [openDelete, setOpenDelete] = useState(false);
+  const {tripID } = useParams()
 
-  const [ckEditorDescription, setCkEditorDescription] = useState("");
-  const [ckEditorItinerary, setCkEditorItinerary] = useState("");
-  const [ckEditorCostIncludes, setCkEditorCostIncludes] = useState("");
-  const [ckEditorCostExcludes, setCkEditorCostExcludes] = useState("");
+
+  const [tripCategory,setTripCategory] = useState("")
+  const [addProductDetails, setAddProductDetails] = useState({category: "",
+  heading: "",
+  price: "",
+  imageUrl: "",
+  duration: "",
+  season: ""});
+  
 
   const fetchCategoryData = async () => {
-    try {
-      const url = "/tripcategory";
-      const result = await getAllData(url);
+    let headersList = {
+      "Accept": "*/*",
 
-      if (result.status === 200) {
-        const resData = result.data.data.results;
-        setCategoryData(resData);
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+      "Content-Type": "application/json"
     }
-  };
 
-  const fetchTripData = async () => {
-    try {
-      const url = "/tripinfo/" + tripID;
-      const result = await getAllData(url);
 
-      if (result.status === 200) {
-        const resData = result.data.data;
-        console.log("resData101 : ", resData);
-        setEditProductDetails(resData);
-        setCkEditorDescription(resData.description);
-        setCkEditorItinerary(resData.itinerary);
-        setCkEditorCostIncludes(resData.cost_includes);
-        setCkEditorCostExcludes(resData.cost_excludes);
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
 
-  const onClickDeleteBTN = async (updateID) => {
-    try {
-      const url = "/tripinfo/" + updateID;
-      console.log(url);
-      const result = await deleteData(url);
-      if (result.status === 200) {
-        console.log("success", result);
-        navigate("/admin/products");
-        toast.warn("Product is deleted");
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
+    let response = await fetch("http://localhost:8000/category/", {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data,
+      "category......");
+    setTripCategory(data.data)
   };
 
   const onSubmitClick = async () => {
-    let menuItemData = new FormData();
-    menuItemData.append("categoryId", editProductDetails.categoryId);
-    menuItemData.append("heading", editProductDetails.heading);
-    menuItemData.append("image", editProductDetails.image);
-    menuItemData.append("duration", editProductDetails.duration);
-    menuItemData.append("trip_grade", editProductDetails.trip_grade);
-    menuItemData.append("seasons", editProductDetails.seasons);
-    menuItemData.append("price", editProductDetails.price);
-    menuItemData.append("description", ckEditorDescription);
-    menuItemData.append("itinerary", ckEditorItinerary);
-    menuItemData.append("cost_includes", ckEditorCostIncludes);
-    menuItemData.append("cost_excludes", ckEditorCostExcludes);
-    menuItemData.append("overview", "overview");
 
-    try {
-      const url = "/tripinfo/" + tripID;
-      const result = await updateData(url, menuItemData);
-      if (result.status === 201) {
-        console.log("update product", result);
-        navigate("/admin/products");
-        toast.success("Product is added");
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed product", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+    let headersList = {
+      "Accept": "*/*",
+ 
+      "Content-Type": "application/json"
     }
+   
+
+    let bodyContent = JSON.stringify({
+      "category": addProductDetails.category,
+      "heading": addProductDetails.heading,
+      "price": parseInt(addProductDetails.price),
+      "imageUrl": addProductDetails.imageUrl,
+      "duration": parseInt(addProductDetails.duration),
+      "season": addProductDetails.season
+
+    });
+
+    let response = await fetch(`http://localhost:8000/product/${tripID}`, {
+      method: "PUT",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data, "updated ifno of precut.");
+
+
+
+
+
   };
+
+  async function fetchEditData(id){
+    let headersList = {
+      "Accept": "*/*",
+
+      "Content-Type": "application/json"
+    }
+
+
+
+    let response = await fetch(`http://localhost:8000/product/${id}`, {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data,
+      "cateedit......");
+    setAddProductDetails(data.data)
+  }
 
   useEffect(() => {
+    console.log("Trip ID:", tripID);
+    fetchEditData(tripID);
     fetchCategoryData();
-    fetchTripData();
-    // eslint-disable-next-line
-  }, []);
+    
+ }, [tripID]);
+ 
 
-  const handleOpenDelete = () => {
-    setOpenDelete(true);
-  };
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
-  };
 
-  const onChangeInEditingData = (e) => {
-    setEditProductDetails({
-      ...editProductDetails,
+  const onChangeInAddingData = (e) => {
+    setAddProductDetails({
+      ...addProductDetails,
       [e.target.name]: e.target.value,
     });
+
   };
+
 
   return (
     <div className="addProduct_wrapper">
       <HeaderDisplay
         textonly={false}
-        title={editProductDetails ? editProductDetails.heading : "Loading ...."}
+        title={addProductDetails.heading}
         subtitle="Edit Product"
-        imgFile={editProductDetails ? editProductDetails.image : "Loading ...."}
+        imgFile={addProductDetails.imageUrl}
+        price = {addProductDetails.price}
+        duration = {addProductDetails.duration}
+        season = {addProductDetails.season}
+        isEdit={true}
       />
       <div className="addProduct_container">
-        <h1>Edit Product</h1>
+        <h1>Edit Package</h1>
         <div className="addProduct_content">
           <form action="/">
-            <div className="divFlex">
-              <div className="apc_textItem" id="apc_heading">
-                <div className="apc_title">Heading : </div>
-                <div className="apc_inputText">
-                  <input
-                    type="text"
-                    name="heading"
-                    value={editProductDetails ? editProductDetails.heading : ""}
-                    onChange={onChangeInEditingData}
-                  />
-                </div>
-              </div>
-
-              <div className="apc_dropDownItem" id="apc_categorySel">
+             
+          <div className="apc_dropDownItem" id="apc_categorySel" >
                 <div className="apc_title">
-                  <label for="categoryId">Trip Category:</label>
+                  <label for="TripCategory">Trip Category:</label>
                 </div>
                 <div className="apc_dropDownItemList">
                   <select
-                    name="categoryId"
-                    id="categoryId"
-                    onChange={onChangeInEditingData}
+                    name="category"
+                    id="TripCategory"
+                    value={addProductDetails.category}
+                    onChange={onChangeInAddingData}
                   >
-                    {Array.isArray(categoryData) &&
-                      editProductDetails &&
-                      categoryData.map((category, i) => {
-                        let selectedCategory = false;
-                        if (
-                          category.title ===
-                          editProductDetails.TripCategory.title
-                        ) {
-                          selectedCategory = true;
-                        }
+                            <option selected value="" disabled>Select an option</option>
+                    {Array.isArray(tripCategory) &&
+                      tripCategory.map((category, i) => {
                         return (
-                          <option
-                            value={category.id}
-                            key={i}
-                            selected={selectedCategory}
-                          >
-                            {category.title}
+                          <option  value={category._id} key={i}>
+                            {category.name}
                           </option>
                         );
                       })}
                   </select>
                 </div>
+                
+              </div>
+
+
+              <div className="apc_textItem" id="apc_duration">
+                <div className="apc_title">
+                  <FaRegClock />
+                </div>
+                <div className="apc_inputText" >
+                  <input
+                    type="number"
+                    placeholder="Days"
+                    name="duration"
+                    value={addProductDetails.duration}
+                    onChange={onChangeInAddingData}
+                  />
+                </div>
+              </div>
+
+
+              <div className="apc_textItem" id="apc_season">
+                <div className="apc_title">
+                  <FaCloudSun />
+                </div>
+                <div className="apc_inputText">
+                  <input
+                    placeholder="Season"
+                    name="season"
+                    onChange={onChangeInAddingData}
+                    value={addProductDetails.season}
+                  />
+                </div>
+              </div>
+
+
+            <div className="divFlex">
+              <div className="apc_textItem" id="apc_heading">
+                <div className="apc_title">Destination : </div>
+                <div className="apc_inputText" >
+                  <input
+                    type="text"
+                    name="heading"
+                    value={addProductDetails.heading}
+                    onChange={onChangeInAddingData}
+                  />
+                </div>
+                
+              </div>
+              
+
+             
+
+              <div className="apc_textItem" id="apc_price">
+                <div className="apc_title">
+                  <FaDollarSign />
+                </div>
+                <div className="apc_inputText">
+                  <input
+                    placeholder="Price"
+                    name="price"
+                    value={addProductDetails.price}
+                    onChange={onChangeInAddingData}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* image uploader  */}
-            {/* <div className="apc_uploadImg">
-              <input type="file" id="myFile" name="filename" />
-            </div> */}
+
+
+
+            
 
             <div
               className="apc_textItem"
@@ -229,176 +242,41 @@ export default function EditProduct() {
               <div className="apc_inputText">
                 <input
                   type="text"
-                  name="image"
-                  value={editProductDetails ? editProductDetails.image : ""}
-                  onChange={onChangeInEditingData}
-                />
-              </div>
-            </div>
+                  name="imageUrl"
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Description : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_description"
-                  data={ckEditorDescription}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorDescription(data);
-                  }}
+                  value={addProductDetails.imageUrl}
+                  onChange={onChangeInAddingData}
                 />
               </div>
             </div>
 
             <div className="divFlex">
-              <div className="apc_textItem" id="apc_duration">
-                <div className="apc_title">
-                  <FaRegClock />
-                </div>
-                <div className="apc_inputText">
-                  <input
-                    type="number"
-                    placeholder="Days"
-                    name="duration"
-                    value={
-                      editProductDetails ? editProductDetails.duration : ""
-                    }
-                    onChange={onChangeInEditingData}
-                  />
-                </div>
-              </div>
+             
 
-              <div className="apc_textItem" id="apc_grade">
-                <div className="apc_title">
-                  <MdDirectionsWalk />
-                </div>
-                <div className="apc_inputText">
-                  <input
-                    placeholder="Trip Grade"
-                    name="trip_grade"
-                    value={
-                      editProductDetails ? editProductDetails.trip_grade : ""
-                    }
-                    onChange={onChangeInEditingData}
-                  />
-                </div>
-              </div>
 
-              <div className="apc_textItem" id="apc_season">
-                <div className="apc_title">
-                  <FaCloudSun />
-                </div>
-                <div className="apc_inputText">
-                  <input
-                    placeholder="Season"
-                    name="seasons"
-                    value={editProductDetails ? editProductDetails.seasons : ""}
-                    onChange={onChangeInEditingData}
-                  />
-                </div>
-              </div>
 
-              <div className="apc_textItem" id="apc_price">
-                <div className="apc_title">
-                  <FaDollarSign />
-                </div>
-                <div className="apc_inputText">
-                  <input
-                    placeholder="Price"
-                    name="price"
-                    value={editProductDetails ? editProductDetails.price : ""}
-                    onChange={onChangeInEditingData}
-                  />
-                </div>
-              </div>
+             
+
+             
             </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Itinerary : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_itinerary"
-                  data={ckEditorItinerary}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorItinerary(data);
-                  }}
-                />
-              </div>
-            </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Cost Includes : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_costIncludes"
-                  data={ckEditorCostIncludes}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorCostIncludes(data);
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </div>
-            </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Cost Excludes : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_costExcludes"
-                  data={ckEditorCostExcludes}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorCostExcludes(data);
-                  }}
-                />
-              </div>
-            </div>
+
+
+
 
             <input
               type="submit"
-              value="Update Product"
+              value="Edit Product"
               id="BtnToSubmit"
               onClick={(e) => {
                 e.preventDefault();
                 onSubmitClick();
               }}
-            />
+            ></input>
           </form>
-          <BtnToClick
-            title="Delete Product"
-            customColor="red"
-            onclicking={() => {
-              handleOpenDelete();
-            }}
-          />
         </div>
-        {/* Delete Modal */}
-        <Modal
-          open={openDelete}
-          onClose={handleCloseDelete}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <h3>Are you sure want to delete this Category?</h3>
-            <BtnToClick
-              title="Delete"
-              customColor="red"
-              onclicking={() => onClickDeleteBTN(editProductDetails.id)}
-            />
-          </Box>
-        </Modal>
       </div>
     </div>
   );

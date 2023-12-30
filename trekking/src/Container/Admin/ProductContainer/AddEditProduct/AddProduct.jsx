@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 
 export default function AddProduct() {
   const navigate = useNavigate();
+  const [tripCategory, setTripCategory] = useState("")
+
   const [categoryData, setCategoryData] = useState("");
   const [addProductDetails, setAddProductDetails] = useState({});
   const [ckEditorDescription, setCkEditorDescription] = useState("");
@@ -21,65 +23,93 @@ export default function AddProduct() {
   const [ckEditorCostExcludes, setCkEditorCostExcludes] = useState("");
 
   const fetchCategoryData = async () => {
-    try {
-      const url = "/tripcategory";
-      const result = await getAllData(url);
+    let headersList = {
+      "Accept": "*/*",
 
-      if (result.status === 200) {
-        const resData = result.data.data.results;
-        // setAddProductDetails({ categoryId: resData[0].id.toString() });
-        // setAddProductDetails({
-        //   ...addProductDetails,
-        //   ['categoryId']:resData[0].id.toString(),
-        // });
-        setCategoryData(resData);
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+      "Content-Type": "application/json"
     }
+
+
+
+    let response = await fetch("http://localhost:8000/category/", {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data,
+      "category......");
+    setTripCategory(data.data)
   };
 
   const onSubmitClick = async () => {
-    let menuItemData = new FormData();
-    menuItemData.append(
-      "categoryId",
-      addProductDetails.TripCategory
-        ? addProductDetails.TripCategory
-        : categoryData[0].id.toString()
-    );
-    menuItemData.append("heading", addProductDetails.heading);
-    menuItemData.append("image", addProductDetails.image);
-    menuItemData.append("duration", addProductDetails.duration);
-    menuItemData.append("trip_grade", addProductDetails.trip_grade);
-    menuItemData.append("seasons", addProductDetails.seasons);
-    menuItemData.append("price", addProductDetails.price);
-    menuItemData.append("description", ckEditorDescription);
-    menuItemData.append("itinerary", ckEditorItinerary);
-    menuItemData.append("cost_includes", ckEditorCostIncludes);
-    menuItemData.append("cost_excludes", ckEditorCostExcludes);
-    menuItemData.append("overview", "overview");
 
-    
-
-    try {
-      const url = "/tripinfo";
-      const result = await storeData(url, menuItemData);
-      if (result.status === 200) {
-        console.log("success product", result);
-        navigate("/admin/products");
-        toast.success("New Product is added.");
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed product", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+    let headersList = {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+      "Content-Type": "application/json"
     }
+    console.log(addProductDetails,"details.....")
+
+    let bodyContent = JSON.stringify({
+      "category": addProductDetails.category,
+      "heading": addProductDetails.heading,
+      "price": parseInt(addProductDetails.price),
+      "imageUrl": addProductDetails.imageUrl,
+      "duration": parseInt(addProductDetails.duration),
+      "season": addProductDetails.season
+
+    });
+
+    let response = await fetch("http://localhost:8000/product/add", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data, "product details..........");
+
+
+
+
+
+    // let menuItemData = new FormData();
+    // menuItemData.append(
+    //   "categoryId",
+    //   addProductDetails.TripCategory
+    // ? addProductDetails.TripCategory
+    //     : categoryData[0].id.toString()
+    // );
+    // menuItemData.append("heading", addProductDetails.heading);
+    // menuItemData.append("image", addProductDetails.image);
+    // menuItemData.append("duration", addProductDetails.duration);
+    // menuItemData.append("trip_grade", addProductDetails.trip_grade);
+    // menuItemData.append("seasons", addProductDetails.seasons);
+    // menuItemData.append("price", addProductDetails.price);
+    // menuItemData.append("description", ckEditorDescription);
+    // menuItemData.append("itinerary", ckEditorItinerary);
+    // menuItemData.append("cost_includes", ckEditorCostIncludes);
+    // menuItemData.append("cost_excludes", ckEditorCostExcludes);
+    // menuItemData.append("overview", "overview");
+
+
+
+    // try {
+    //   const url = "/tripinfo";
+    //   const result = await storeData(url, menuItemData);
+    //   if (result.status === 200) {
+    //     console.log("success product", result);
+    //     navigate("/admin/products");
+    //     toast.success("New Product is added.");
+    //   } else {
+    //     toast.error("Some error occurred");
+    //     console.log("failed product", result);
+    //   }
+    // } catch (err) {
+    //   toast.error("Some error occurred");
+    //   console.log(err);
+    // }
   };
 
   useEffect(() => {
@@ -94,22 +124,22 @@ export default function AddProduct() {
 
   };
 
-  const fileHandle = (e)=>{
+  const fileHandle = (e) => {
     console.log(e.target.files[0].type)
-      if(!["image/jpeg","image/png","image/jpg"].includes(e.target.files[0].type)){
-        toast.error("file extenison not allowed")
-        e.target.value = null;
-      }
+    if (!["image/jpeg", "image/png", "image/jpg"].includes(e.target.files[0].type)) {
+      toast.error("file extenison not allowed")
+      e.target.value = null;
+    }
 
-      // const result = "http://apicall.com" // api call
-      // api mock 
-      const result = {url:"https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg"}
-  
+    // const result = "http://apicall.com" // api call
+    // api mock 
+    const result = { url: "https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg" }
 
-      setAddProductDetails({
-        ...addProductDetails,
-        "image": result.url,
-      });
+
+    setAddProductDetails({
+      ...addProductDetails,
+      "image": result.url,
+    });
   }
 
   return (
@@ -142,19 +172,16 @@ export default function AddProduct() {
                 </div>
                 <div className="apc_dropDownItemList">
                   <select
-                    name="TripCategory"
+                    name="category"
                     id="TripCategory"
                     onChange={onChangeInAddingData}
                   >
-                    {console.log(
-                      "category print : ",
-                      categoryData ? categoryData[1].id : "ok"
-                    )}
-                    {Array.isArray(categoryData) &&
-                      categoryData.map((category, i) => {
+                            <option selected value="" disabled>Select an option</option>
+                    {Array.isArray(tripCategory) &&
+                      tripCategory.map((category, i) => {
                         return (
-                          <option value={category.id} key={i}>
-                            {category.title}
+                          <option value={category._id} key={i}>
+                            {category.name}
                           </option>
                         );
                       })}
@@ -163,12 +190,9 @@ export default function AddProduct() {
               </div>
             </div>
 
-            {/* image uploader */}
-            <div className="apc_uploadImg">
-              <input type="file" id="myFile"  name="filename" onChange={fileHandle}/>
-            </div>
 
-      
+
+
             <div
               className="apc_textItem"
               id="apc_heading"
@@ -178,34 +202,15 @@ export default function AddProduct() {
               <div className="apc_inputText">
                 <input
                   type="text"
-                  name="image"
-                  disabled
-                  value={addProductDetails.image }
+                  name="imageUrl"
+
+                  value={addProductDetails.imageUrl}
                   onChange={onChangeInAddingData}
                 />
               </div>
             </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Description : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_description"
-                  data={ckEditorDescription}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorDescription(data);
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </div>
-            </div>
+
 
             <div className="divFlex">
               <div className="apc_textItem" id="apc_duration">
@@ -222,18 +227,7 @@ export default function AddProduct() {
                 </div>
               </div>
 
-              <div className="apc_textItem" id="apc_grade">
-                <div className="apc_title">
-                  <MdDirectionsWalk />
-                </div>
-                <div className="apc_inputText">
-                  <input
-                    placeholder="Trip Grade"
-                    name="trip_grade"
-                    onChange={onChangeInAddingData}
-                  />
-                </div>
-              </div>
+
 
               <div className="apc_textItem" id="apc_season">
                 <div className="apc_title">
@@ -242,7 +236,7 @@ export default function AddProduct() {
                 <div className="apc_inputText">
                   <input
                     placeholder="Season"
-                    name="seasons"
+                    name="season"
                     onChange={onChangeInAddingData}
                   />
                 </div>
@@ -262,68 +256,11 @@ export default function AddProduct() {
               </div>
             </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Itinerary : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_itinerary"
-                  data={ckEditorItinerary}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorItinerary(data);
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </div>
-            </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Cost Includes : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_costIncludes"
-                  data={ckEditorCostIncludes}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorCostIncludes(data);
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </div>
-            </div>
 
-            <div className="apc_textAreaItem">
-              <div className="apc_title">Cost Excludes : </div>
-              <div className="apc_textArea">
-                <CKEditor
-                  editor={ClassicEditor}
-                  id="apc_costExcludes"
-                  data={ckEditorCostExcludes}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setCkEditorCostExcludes(data);
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </div>
-            </div>
+
+
+
 
             <input
               type="submit"

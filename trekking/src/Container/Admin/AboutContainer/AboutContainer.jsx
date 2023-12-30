@@ -11,10 +11,23 @@ import "react-toastify/dist/ReactToastify.css";
 export default function AboutContainer() {
   const [editContent, setEditContent] = useState(false);
   const [ckEditorContent, setCkEditorContent] = useState("");
+  const [editId,setEditId] = useState("")
 
   const fetchAbout = async () => {
     try {
-      const url = "/about/1";
+      let response = await fetch("http://localhost:8000/about", { 
+        method: "GET",
+        headers: {
+           'Accept':'application/json',
+           'Content-Type': 'application/json'
+        },      
+      });
+      
+      let data = await response.json();
+      console.log(data,"......");
+    
+
+      const url = "/about/";
       const result = await getAllData(url);
 
       if (result.status === 200) {
@@ -43,16 +56,32 @@ export default function AboutContainer() {
 
   const onSubmitClick = async (e) => {
     e.preventDefault();
-    const url = "/about";
-    console.log(ckEditorContent,"..............")
-    fetch("http://localhost:3000/",{
-      method:"GET"
-    }).then((res)=>{
-      console.log("sucess")
-      console.log(res.data)
-    }).catch((error)=>{
-      console.log("error failed")
-    })
+    let response = await fetch("http://localhost:8000/", { 
+      method: "POST",
+      headers: {
+         'Accept':'application/json',
+         'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({data:ckEditorContent})
+    
+    });
+    
+    let data = await response.text();
+    console.log(data,"......");
+    setEditContent(false);
+     }
+     
+    
+    // const url = "/about";
+    // console.log(ckEditorContent,"..............")
+    // fetch("http://localhost:3000/",{
+    //   method:"GET"
+    // }).then((res)=>{
+    //   console.log("sucess")
+    //   console.log(res.data)
+    // }).catch((error)=>{
+    //   console.log("error failed")
+    // })
     // let menuItemData = new FormData();
     // menuItemData.append("description", ckEditorContent);
    
@@ -69,8 +98,8 @@ export default function AboutContainer() {
     //   toast.error("Some error occurred");
     //   console.log(err);
     // }
-    setEditContent(false);
-  };
+  //   setEditContent(false);
+  // };
 
   return (
     <div className="aboutA_wrapper">

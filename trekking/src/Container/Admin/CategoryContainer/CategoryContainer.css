@@ -3,8 +3,9 @@
 }
 
 .categoryA_container {
-    width: 90%;
+    width: 70%;
     margin: auto;
+    height:100vh;
 }
 
 .categoryA_content {
@@ -12,45 +13,36 @@
     padding: 20px 0px;
 }
 
-.categoryA_content table {
-    width: 100%;
-    text-align: left;
-    background-color: white;
-}
 
+.categoryA_content table {
+    width:100%;
+    text-align:left;
+    background-color: #063970;
+
+    
+}
 .categoryA_content table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: var(--primary);
+    background-color: #063970;
     color: white;
 }
-
-.categoryA_content table td, .categoryA_content table th {
-    /* border: 1px solid #ddd; */
-    padding: 8px;
-}
-
-.categoryA_content table tr:nth-child(even) {
+.categoryA_container table tr{
     background-color: var(--dim-bg);
 }
 
-.categoryA_content table tr:hover {
-    background-color: #ddd;
-}
 
-.categoryA_content table td svg {
-    font-size: 20px;
-    margin: 0px 10px;
-}
 
-.categoryA_content table td svg:first-child:hover {
-    color: green;
-}
 
-.categoryA_content table td svg:last-child:hover {
-    color: red;
-}
+
+
+
+
+
+
+
+
 
 #modalInput input {
     width: calc(100% - 20px);
@@ -61,3 +53,66 @@
     border: 1px solid var(--dim-bg);
     color: black;
 }
+
+.button-9 {
+    width:80px;
+  
+   
+    backface-visibility: hidden;
+   
+    background-color: #405cf5;
+   
+    border-radius: 6px;
+   
+    border-width: 0;
+   
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+   
+    box-sizing: border-box;
+   
+    color: #fff;
+   
+    cursor: pointer;
+   
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+   
+    font-size: 100%;
+   
+    height: 44px;
+   
+    line-height: 1.15;
+   
+    margin: 12px 0 0;
+   
+    outline: none;
+   
+    overflow: hidden;
+   
+    padding: 0 25px;
+   
+    position: relative;
+   
+    text-align: center;
+   
+    text-transform: none;
+   
+    transform: translateZ(0);
+   
+    transition: all .2s,box-shadow .08s ease-in;
+   
+    user-select: none;
+   
+    -webkit-user-select: none;
+   
+    touch-action: manipulation;
+   
+    
+   
+   }
+
+
+
+
+
+
+

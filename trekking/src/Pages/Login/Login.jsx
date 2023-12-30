@@ -1,47 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Login.css";
-import logo from "../../assets/icon/logo_main.png";
+import logo from "../../assets/travel-svgrepo-com.svg";
 import { toast } from "react-toastify";
 import { storeData } from "../../constants/apiService";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthState";
 
 export default function Login() {
+  const {login}= useContext(AuthContext)
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const isAuth = localStorage.getItem("token");
-  useEffect(() => {
-    if (isAuth) {
-      window.location.replace("/admin");
-    }
-    // eslint-disable-next-line
-  }, []);
+ 
 
   const onSubmitLogin = async () => {
-    try {
-      setLoading(true);
-
-      const url = "/user/login";
-      const result = await storeData(url, credentials);
-      console.log(result.data)
-      if (result.status === 200) {
-        console.log("RESULT :", result);
-        const messageToAdmin = "Welcome " + result.data.data.user.username;
-        toast.success(messageToAdmin);
-        localStorage.setItem("token", result.data.data.token);
-        localStorage.setItem("username", result.data.data.user.username);
-        setLoading(false);
-        // navigate("/admin");
-      } else {
-        setLoading(false);
-        toast.error("Invalid Credentials");
-      }
-    } catch (err) {
-      setLoading(false);
-      toast.error("Some error occured");
+    const success = await login({email:credentials.email,password:credentials.password})
+    console.log(success,"from on submit login")
+    if(success){
+      navigate("/admin")
     }
   };
+  
 
   const onChangeCredentials = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -52,9 +32,7 @@ export default function Login() {
       <div className="login_container">
         <img src={logo} alt="" />
         <div className="login_content">
-          {isAuth ? (
-            "... Loading ..."
-          ) : (
+          
             <form action="/admin">
               {/* <h2>LOGIN</h2> */}
               <div className="login_input">
@@ -62,6 +40,7 @@ export default function Login() {
                 <input
                   type="text"
                   name="email"
+                  style={{borderColor:"orange"}}
                   onChange={onChangeCredentials}
                 />
               </div>
@@ -76,15 +55,16 @@ export default function Login() {
               <button
                 type="submit"
                 value="Submit"
+                style={{backgroundColor:"#154c79",borderColor:"orange"}}
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmitLogin();
                 }}
               >
-                {loading ? "... Loading ..." : "LOGIN"}
+               Login
               </button>
             </form>
-          )}
+      
         </div>
       </div>
     </div>

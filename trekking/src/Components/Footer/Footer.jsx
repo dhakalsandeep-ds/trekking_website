@@ -15,23 +15,16 @@ import { getAllData } from "../../constants/apiService";
 import MediaIcon from "../MediaIcon/MediaIcon";
 
 export default function Footer() {
-  const [contactData, setContactData] = useState({
-    contact_number: "9856796",
-    address: "dhading",
-    email: "dhakalsandep71@gmail.com",
-  });
 
-  const [socialMediaData, setSocialMediaData] = useState("www.facebook.com");
-  const [aboutData, setAboutData] = useState("i ma good");
 
-  
+ 
 
   return (
-    <div className="footer_wrapper">
+    <div className="footer_wrapper" style={{backgroundColor:"#063970"}}>
       <div className="footer_container">
       
 
-        <div className="footerCompanyInfo">
+        {/* <div className="footerCompanyInfo">
           
          
           <div className="footerCompanyAffiliated">
@@ -45,10 +38,10 @@ export default function Footer() {
             </span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="footerCopyright">
-          <hr />
+          
           <h4>
             <MdCopyright /> 2023. All rights reserved Sandeep Dhakal
           </h4>

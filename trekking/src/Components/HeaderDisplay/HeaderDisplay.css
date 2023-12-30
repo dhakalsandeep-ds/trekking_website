@@ -1,12 +1,13 @@
 .headerDisplay_wrapper {
     width: 100%;
+    
 }
 
 .headerDisplay_container {
     width: 100%;
     /* height: 200px; */
     height: 280px;
-    background-color: var(--primary);
+    background-color: #154c79;
     position: relative;
 }
 
@@ -24,8 +25,8 @@
 .headerDisplay_imgContainer {
     width: 100%;
     /* height: 200px; */
-    height: 340px;
-    background-color: var(--primary);
+    height: 500px;
+    background-color: #154c79;
     position: relative;
     text-align: left;
     color: white;

@@ -3,8 +3,11 @@ import "./AboutUsHome.css";
 import { Link } from "react-router-dom";
 import { getAllData } from "../../../../constants/apiService";
 import HTMLReactParser from "html-react-parser";
+import Testimonial from "../Testimonial/Testimonial";
 
-export default function AboutUsHome() {
+export default function AboutUsHome({istestiomonial}) {
+
+
   const [aboutData, setAboutData] = useState("");
 
   const fetchAbout = async () => {
@@ -27,16 +30,42 @@ export default function AboutUsHome() {
     fetchAbout();
   }, []);
 
+
+  if(istestiomonial){
+    return (
+      <div className="homeAboutUs_wrapper">
+      <div className="homeAboutUs_container">
+        <div className="homeAboutUs_leftContainer">
+          <h1>
+           
+TESTIMONIALS <br></br>
+ <span class="hide">Here is what our client says</span> 
+
+          </h1>
+        </div>
+        <div className="homeAboutUs_rightContainer">
+          <Testimonial></Testimonial>
+       
+
+
+         
+        </div>
+      </div>
+    </div>
+    )
+  }
+
   return (
     <div className="homeAboutUs_wrapper">
       <div className="homeAboutUs_container">
         <div className="homeAboutUs_leftContainer">
-          <h1>
+          <h1 >
             WELCOME TO <br />
-            Rocket Trekking Nepal
+            <span class="hide"> Rocket Trekking Nepal</span> 
           </h1>
         </div>
         <div className="homeAboutUs_rightContainer">
+        
         <h3>Namaste & welcome to Nepal
 
 Rocket Treks Nepal Pvt. Ltd. is founded by a team of experienced tour, trekking  and mountaineering professionals. We pride on our attention to detail for our personal service as we designs tailor-made travel itineraries to deliver an unique travel experiences in wild and wonderful  of the Himalayas. Our program is adventurous which is full of fun and at the same time we are committed to safety and freedom. All of our  adventure is about self  discovery  and  removing ourselves from the annoyances of daily life and embarking on a journey that may bring peace of  mind and drastic change on our lifestyle.
@@ -56,7 +85,7 @@ Trekking can be as long or short, as easy or difficult as you wish. There are tw
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <div className="goBTN">KNOW MORE</div>
+            <div className="goBTN" style={{backgroundColor:"#063970"}}>KNOW MORE</div>
           </Link>
         </div>
       </div>

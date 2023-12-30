@@ -10,13 +10,15 @@ svg {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     position: fixed;
+    top:0;
     z-index: 10;
     /* -webkit-transition: height 4s width 4s ease-in-out; */
     transition: height 0.5s;
 }
 
 .NavDiv_bg {
-    background-color: #063970;
+    background-color: var(--primary);
+    /* opacity: 0; */
     height: 55px;
 }
 
@@ -38,11 +40,18 @@ svg {
 .logoContainer {
     width: 78px;
     height: 30px;
-    
+    /* width: 100px; */
+    /* height: 90px; */
+    /* display: flex; */
+    /* background-color: var(--primary); */
+    /* border: 2px solid white; */
+    /* border-top: 2px solid var(--primary); */
+    /* transition: all 0.9s; */
 }
 
 .logoWrapper {
     margin: auto;
+    /* padding: 5px; */
     background: none;
 }
 
@@ -51,12 +60,19 @@ svg {
     background: none;
 }
 
-
+.serachContainer {
+    width: 25%;
+    margin: auto;
+    padding: 0px 30px;
+    font-size: 24px;
+    color: white;
+    transition: all 0.5s;
+}
 
 .NavLinkContainer {
     width: calc(75% - 100px);
     margin: auto;
-   
+    /* background-color: violet; */
 }
 
 .NavLinkSubContainer {
@@ -83,24 +99,29 @@ svg {
 }
 
 .Nav-li-unselect {
-    color: #063970;
+    color: var(--nav-unselect);
 }
 
 .NavLinkSubContainer li a {
     text-decoration: none;
     padding: 10px 20px;
-
-   
+    border-radius: 40px;
+    /* color: white; */
 }
 
 .NavLinkSubContainer li .active {
-    background-color: #063970;
+    background-color: var(--primary);
     color: white;
 }
 
+.icon_res a {
+    color: White;
+    font-size: 30px;
+}
 
-
-
+.icon_res {
+    display: none;
+}
 
 
 @media (max-width: 1120px) {
@@ -137,7 +158,14 @@ svg {
         z-index: 5;
     }
 
-    
+
+
+    .NavLinkContainer {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        /* padding: 10px 0px; */
+    }
 
 
     .icon_res {
@@ -161,9 +189,9 @@ svg {
     .responsiveNav {
         position: relative;
         padding: 5px 5px;
-        
-     
-       
+        border-radius: 0px 0px 5px 5px;
+        background-color: var(--primary);
+        border-left: 1px solid var(--dim-bg);
         /* -webkit-transition: height 4s width 4s ease-in-out; */
         transition: all 0.2s;
         width: 75%;
@@ -184,20 +212,33 @@ svg {
         /* margin-left: 2px !important; */
     }
 
-  
+    .responsiveNav li:hover {
+        background-color: #154c79;
+        color: var(--primary);
+    }
 
     .responsiveNav li:hover .active {
-        background-color: #063970!important;
-        color: var(--primary);
+        background-color: var(--dim-bg);
+        color: black;
     }
 
 }
 
+@media (max-width: 600px) {
+    .searchBar .sb2 input {
+        padding: 5px 12px !important;
+    }
+}
 
+@media (max-width: 400px) {
+    .topLogoContainer {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        transition: all 0.9s;
+    }
 
-
-
-.active {
-    color:white;
-    background-color: #154c79!important;
+    .serachContainer {
+        display: none;
+    }
 }

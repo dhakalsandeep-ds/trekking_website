@@ -29,6 +29,9 @@ export default function CategoryContainer() {
   const [openAdd, setOpenAdd] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [edit,setEdit] = useState("")
+  const [editId,setEditId] = useState("")
+  const [add, setAdd] = useState("")
 
   const [categoryData, setCategoryData] = useState("");
   const [soloCategoryData, setSoloCategoryData] = useState({});
@@ -37,21 +40,41 @@ export default function CategoryContainer() {
   // const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const fetchCategoryData = async () => {
-    try {
-      const url = "/tripcategory";
-      const result = await getAllData(url);
 
-      if (result.status === 200) {
-        const resData = result.data.data.results;
-        setCategoryData(resData);
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+    let headersList = {
+      "Accept": "*/*",
+
+      "Content-Type": "application/json"
     }
+
+
+
+    let response = await fetch("http://localhost:8000/category/", {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data,
+      "category......");
+    setCategoryData(data.data)
+
+
+    // try {
+    //   const url = "/tripcategory";
+    //   const result = await getAllData(url);
+
+    //   if (result.status === 200) {
+    //     const resData = result.data.data.results;
+    //     setCategoryData(resData);
+    //   } else {
+    //     toast.error("Some error occurred");
+    //     console.log(result);
+    //   }
+    // } catch (err) {
+    //   toast.error("Some error occurred");
+    //   console.log(err);
+    // }
   };
 
   const fetchSoloCategoryData = async (id) => {
@@ -84,7 +107,10 @@ export default function CategoryContainer() {
   };
 
   const handleOpenEdit = async (id) => {
-    fetchSoloCategoryData(id);
+    const ans = categoryData.filter(p=>p._id === id)
+    console.log(ans,"ans.........")
+    setEdit(ans[0].name)
+    setEditId(id)
     setOpenEdit(true);
   };
   const handleCloseEdit = () => {
@@ -110,8 +136,8 @@ export default function CategoryContainer() {
 
   const onChangeInAdding = (e) => {
 
-    if(e.target.name != 'title'){
-      if(!["image/jpeg","image/png","image/jpg"].includes(e.target.files[0].type)){
+    if (e.target.name != 'title') {
+      if (!["image/jpeg", "image/png", "image/jpg"].includes(e.target.files[0].type)) {
         toast.error("file extenison not allowed")
         e.target.value = null;
       }
@@ -119,9 +145,9 @@ export default function CategoryContainer() {
       // const result = "http://apicall.com" // api call
       // api mock 
 
-    
-      const result = {url:"https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg"}
-       
+
+      const result = { url: "https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg" }
+
 
       setAddCategoryData({
         ...addCategoryData,
@@ -130,18 +156,18 @@ export default function CategoryContainer() {
 
 
 
-      return 
-  
+      return
+
     }
-    
+
     setAddCategoryData({
       ...addCategoryData,
       [e.target.name]: e.target.value,
     });
-    
+
   };
 
-  
+
 
   const onClickAddBTN = async () => {
     try {
@@ -200,18 +226,82 @@ export default function CategoryContainer() {
     }
   };
 
+  const handleAddCateogry = async (e) => {
+    e.preventDefault()
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+    }
+    console.log("add handle category.....")
+
+    let bodyContent = JSON.stringify({
+      "name": add
+    });
+
+    let response = await fetch("http://localhost:8000/category/", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data);
+    fetchCategoryData()
+  }
+  const handleDelete = async(id) => {
+    let headersList = {
+      "Accept": "*/*"
+     }
+     
+     let response = await fetch(`http://localhost:8000/category/${id}`, { 
+       method: "DELETE",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     console.log(data,"deleted......");
+     setCategoryData(prev=>prev.filter(p=>p._id !== id))
+  }
+
+  const handleEditSumbit = async(e)=>{
+    let headersList = {
+      "Accept": "*/*",
+     
+      "Content-Type": "application/json"
+     }
+     
+     let bodyContent = JSON.stringify({
+       "name":edit
+     });
+     
+     let response = await fetch(`http://localhost:8000/category/${editId}`, { 
+       method: "POST",
+       body: bodyContent,
+       headers: headersList
+     });
+     
+     if(response.status === 200){
+      let data = await response.json();
+      console.log(data,"edit data");
+      toast.success(`${data.message}`)
+      setCategoryData(prev => prev.map(p=>p._id === editId ? {...p,name:edit} : p))
+     }else{
+      toast.error(`${response.status} - ${response.statusText}`)
+     }
+     
+     
+  }
+
   return (
     <div className="categoryA_wrapper">
       <div className="categoryA_container">
         <h1>CATEGORY</h1>
-        <div
-          className="addCategory_div"
-          onClick={() => {
+      
+        
+          <input           onClick={() => {
             handleOpenAdd();
-          }}
-        >
-          <BtnToClick title="Add Category" />
-        </div>
+          }} type="button" className="button-9" value="add"/>
+       
         <div className="categoryA_content">
           <table id="categoryTable">
             <tr>
@@ -224,16 +314,16 @@ export default function CategoryContainer() {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
-                    <td>{category.title}</td>
+                    <td>{category.name}</td>
                     <td>
                       <MdModeEditOutline
                         onClick={() => {
-                          handleOpenEdit(category.id);
+                          handleOpenEdit(category._id);
                         }}
                       />{" "}
                       <MdDelete
                         onClick={() => {
-                          handleOpenDelete(category.id);
+                          handleDelete(category._id);
                         }}
                       />
                     </td>
@@ -257,15 +347,17 @@ export default function CategoryContainer() {
                 type="text"
                 name="title"
                 placeholder="Category Title"
-                onChange={onChangeInAdding}
+                value={add}
+                onChange={(e) => setAdd(e.target.value)}
               />
               <input
-                type="file"
-                name="image"
-                placeholder="Category Image URL"
-                onChange={onChangeInAdding}
+                type="submit"
+                name="submit"
+                value="add"
+                onClick={(e)=>handleAddCateogry(e)}
+              // onChange={handleSubmit()}
               />
-              <BtnToClick title="Add" onclicking={() => onClickAddBTN()} />
+
             </div>
           </Box>
         </Modal>
@@ -284,20 +376,11 @@ export default function CategoryContainer() {
                 type="text"
                 name="title"
                 placeholder="Category Title"
-                value={soloCategoryData.title}
-                onChange={onChange}
+                value={edit}
+                onChange={(e)=>setEdit(e.target.value)}
               />
-              <input
-                type="text"
-                name="image"
-                placeholder="Category Image URL"
-                value={soloCategoryData.image}
-                onChange={onChange}
-              />
-              <BtnToClick
-                title="Update"
-                onclicking={() => onClickUpdateBTN(soloCategoryData.id)}
-              />
+           
+             <input type="button" value="submit" onClick={handleEditSumbit} />
             </div>
           </Box>
         </Modal>

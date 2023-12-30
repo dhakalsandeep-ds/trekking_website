@@ -12,5 +12,13 @@ export let inquirySchema = Schema({
   contactNumber:{
     type:Number,
     required: true
+  },
+  message:{
+    type:String,
+    required:true
+  },
+  seen:{
+    type:Boolean,
+    
   }
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ContactContainer.css";
 
 import Box from "@mui/material/Box";
@@ -9,6 +9,7 @@ import { MdLocationOn, MdCall, MdEmail } from "react-icons/md";
 import BtnToClick from "../../../Components/BtnToClick/BtnToClick";
 import { getAllData, updateData } from "../../../constants/apiService";
 import { toast } from "react-toastify";
+import AuthContext from "../../../AuthState";
 
 const style = {
   position: "absolute",
@@ -23,149 +24,110 @@ const style = {
 };
 
 export default function ContactContainer() {
-  const [openEdit, setOpenEdit] = useState(false);
-  const [editId, setEditId] = useState("");
-  const [contactData, setContactData] = useState({
-    contact_number: "",
-    address: "",
-    email: "",
-  });
+  // const {user} = useContext(AuthContext)
 
-  const fetchContactData = async () => {
-    try {
-      const url = "/contact/1";
-      const result = await getAllData(url);
-      if (result.status === 200) {
-        console.log("result", result.data.data);
-        setContactData({
-          contact_number: result.data.data.contact_number,
-          address: result.data.data.address,
-          email: result.data.data.email,
-        });
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
+
+  const [email,setEmail] = useState("")
+  const [isEmailError, setIsEmailError] = useState({error:"",message:[]})
+
+  const [phone,setPhone] = useState("")
+  const [isPhoneError, setIsPhoneError] = useState({error:"",message:[]})
+
+  const [location,setLocation] = useState("")
+
+  const handleEmail = (e) => {
+   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    console.log('inside handle email')
+    setIsEmailError({error:true,message:["email is invalid"]})
+   }else{
+    setIsEmailError({error:false,message:[]})
+   }
+    console.log(e.target.value)
+    setEmail(e.target.value)
+  }
+
+  const handlePhone = (e) => {
+    if(!/^[0-9]{8}$|^[0-9]{10}$/.test(phone)){
+     console.log('inside handle phone')
+     setIsPhoneError({error:true,message:["must not contain letter and must be of 8 or 10 digits"]})
+    }else{
+     setIsPhoneError({error:false,message:[]})
     }
-  };
+     console.log(e.target.value)
+     setPhone(e.target.value)
+   }
 
-  const updateContactData = async () => {
-    try {
-      const url = "/contact/1";
-      const result = await updateData(url, contactData);
-      if (result.status === 200 || result.status === 201) {
-        console.log("Updated Success", result);
-        toast.success("Contact updated");
-        fetchContactData();
-        handleCloseEdit();
-      } else {
-        toast.error("Some error occurred");
-        console.log(result);
+   const handleSubmit =(e) => {
+    e.preventDefault()
+    async function call(){
+      let headersList = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+       }
+       
+       let bodyContent = JSON.stringify({
+         "email":email,
+         "contact":phone,
+         "location":location
+       });
+       try{
+       let response = await fetch("http://localhost:8000/contact", { 
+         method: "POST",
+         body: bodyContent,
+         headers: headersList
+       });
+       
+       let data = await response.json();
+      const newLocal = "..............";
+       console.log(data,newLocal);
+       if(data.success === true){
+        toast.success(data.message)
+       }else {
+        toast.error(data.message)
+       }
+       
+      }catch(e){
+        console.log(e)
+        console.log(e.message)
+        toast.error(e)
       }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
     }
-  };
-
-  useEffect(() => {
-    fetchContactData();
-  }, []);
-
-  //this will open the modal and set name for the Modal title
-  const handleOpenEdit = (pointer) => {
-    setEditId(pointer);
-    setOpenEdit(true);
-  };
-
-  //this will close the modal and set name for the Modal title to Empty
-  const handleCloseEdit = () => {
-    setEditId("");
-    setOpenEdit(false);
-  };
-
-  const onChange = (e) => {
-    setContactData({ ...contactData, [e.target.name]: e.target.value });
-  };
-
+    call()
+   }
+  // console.error(user,"user form dat fetched background")
   return (
-    <div className="contactA_wrapper">
-      <div className="contactA_container">
-        <h2>CONTACT INFO</h2>
-        <div className="contactA_content">
-          <div className="cac_item">
-            <div className="cac_itemLeft">
-              <MdLocationOn />
-            </div>
-            <div className="cac_itemMid">
-              {contactData ? contactData.address : "Loading ..."}
-            </div>
-            <div className="cac_itemRight">
-              <MdModeEditOutline
-                onClick={() => {
-                  handleOpenEdit("address");
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="cac_item">
-            <div className="cac_itemLeft">
-              <MdCall />
-            </div>
-            <div className="cac_itemMid">
-              {contactData ? contactData.contact_number : "Loading ..."}
-            </div>
-            <div className="cac_itemRight">
-              <MdModeEditOutline
-                onClick={() => {
-                  handleOpenEdit("contact_number");
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="cac_item">
-            <div className="cac_itemLeft">
-              <MdEmail />
-            </div>
-            <div className="cac_itemMid">
-              {contactData ? contactData.email : "Loading ..."}
-            </div>
-            <div className="cac_itemRight">
-              <MdModeEditOutline
-                onClick={() => {
-                  handleOpenEdit("email");
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Edit Modal */}
-        <Modal
-          open={openEdit}
-          onClose={handleCloseEdit}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <h3>Edit {editId.charAt(0).toUpperCase() + editId.slice(1)}</h3>
-            <div id="modalInput">
-              <input
-                type="text"
-                name={editId}
-                onChange={onChange}
-                value={contactData[editId]}
-              />
-              <BtnToClick title="Update" onclicking={updateContactData} />
-            </div>
-          </Box>
-        </Modal>
-      </div>
+   
+    <>
+    <div className="form-box">
+  
+  <form>
+    <div className="field1">
+      <label> Contact Info </label>
+      {/* <input type="text" value={user.email} /> */}
+      <input placeholder="E-mail" value={email} onChange={(e)=>{handleEmail(e)}}/>
+      <p>
+        {isEmailError.error && isEmailError.message.map((msg)=>{
+          console.log("inside email error")
+          return <span> {msg}</span>
+        })}
+      </p>
+      <input placeholder="Phone 000-000-0000" value={phone} onChange={(e)=>{handlePhone(e)}} />
+      <p>
+        {isPhoneError.error && isPhoneError.message.map((msg)=>{
+          console.log("inside email error")
+          return <span> {msg}</span>
+        })}
+      </p>
+      <input placeholder="location" value={location} onChange={(e)=>{setLocation(e.target.value)}} />
+      {/* <textarea placeholder="Shipping Address" />
+      <textarea placeholder="Physical location of the project" /> */}
     </div>
+
+    <button onClick={(e)=>{handleSubmit(e)}} type="submit" id="submitBtn" className="submitBtn">submit</button>
+  </form>
+
+ 
+</div>
+    </>
   );
 }
