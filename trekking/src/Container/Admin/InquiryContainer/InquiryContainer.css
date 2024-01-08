@@ -50,12 +50,3 @@
     border: 1px solid var(--dim-bg);
     color: black;
 }
-
-#modalTitle {
-    margin: 10px 0px;
-    text-align: center;
-}
-
-.modalContents {
-    margin: 30px 0px;
-}

@@ -126,6 +126,8 @@ function Product({ categoryId,name}) {
             
               return (
                 <ProductCard
+                  tlink={true}
+                  link={`/perProduct/${data._id}`}
                   key={i}
                   img={data.imageUrl}
                   title={data.heading}

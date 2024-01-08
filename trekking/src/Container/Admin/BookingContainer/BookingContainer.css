@@ -1,67 +1,47 @@
 .bookingA_wrapper {
     width: 100%;
+    margin-top:55px;
 }
 
 .bookingA_container {
     width: 90%;
     margin: auto;
+    height:100vh;
 }
 
 .bookingA_content table {
     width: 100%;
     text-align: left;
-    background-color: white;
+    border-color: #063970;
 }
 
 .bookingA_content table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: var(--primary);
+    background-color: #063970;
     color: white;
 }
 
-.bookingA_content table td, .bookingA_content table th {
-    /* border: 1px solid #ddd; */
-    padding: 8px;
+
+
+.bokkingA_content table tr {
+    background-color:var(--dim-bg);
 }
 
-.bookingA_content table tr:nth-child(even) {
-    background-color: var(--dim-bg);
-}
+/* .bookingA_content table tr th,.bookingA_content table tr,
+.bookingA_content table tr td
+{
+    border-color: #063970;
+} */
 
-.bookingA_content table tr:hover {
-    background-color: #ddd;
-}
 
-.bookingA_content table td svg {
-    font-size: 20px;
-    margin: 0px 10px;
-}
 
-.bookingA_content table td svg:first-child:hover {
-    color: green;
-}
 
-.bookingA_content table td svg:last-child:hover {
-    color: red;
-}
 
-#modalInput input {
-    width: calc(100% - 20px);
-    padding: 8px 10px;
-    font-size: 16px;
-    margin: 5px 0px;
-    border-radius: 10px;
-    border: 1px solid var(--dim-bg);
-    color: black;
-}
 
-#modalTitle {
-    margin: 10px 0px;
-    text-align: center;
-}
 
-.modalContents {
-    margin: 30px 0px;
-}
+
+
+
+

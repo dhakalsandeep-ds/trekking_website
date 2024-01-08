@@ -49,17 +49,42 @@ export default function BookingContainer() {
   const [deleteId, setDeleteId] = useState("");
 
   const fetchBookingData = async () => {
-    try {
-      const url = "/tripbooking";
-      const result = await getAllData(url);
-      if (result.status === 200) {
-        setBookingData(result.data.data.results);
-      } else {
-        toast.error("Some error occurred");
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-    }
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+     }
+     
+    //  let bodyContent = JSON.stringify({
+    //    "packageName":"shail",
+    //    "name":"ramesh",
+    //    "numberOfPeople":7,
+    //    "contactNumber":985748393,
+    //    "arrivalDate":"2/12/200"
+       
+       
+    //  });
+     
+     let response = await fetch("http://localhost:8000/bookings", { 
+       method: "GET",
+       headers: headersList
+     });
+     
+     let data = await response.json();
+     console.log(data);
+     setBookingData(data.data)
+     
+
+    // try {
+    //   const url = "/tripbooking";
+    //   const result = await getAllData(url);
+    //   if (result.status === 200) {
+    //     setBookingData(result.data.data.results);
+    //   } else {
+    //     toast.error("Some error occurred");
+    //   }
+    // } catch (err) {
+    //   toast.error("Some error occurred");
+    // }
   };
 
   const fetchCategoryData = async (categoryId) => {
@@ -189,6 +214,25 @@ export default function BookingContainer() {
     setOpenDelete(false);
   };
 
+  const handleDelete = async(id)=>{
+    
+      console.log(id,'id...........')
+      let headersList = {
+        "Accept": "*/*",
+       }
+       
+       let response = await fetch(`http://localhost:8000/bookings/${id}`, { 
+         method: "DELETE",
+         headers: headersList
+       });
+       
+       let data = await response.json();
+      //  Toast.success(data.data.message)
+      setBookingData(bd=>bd.map(p=>p))
+       toast.success("deleted")
+
+  }
+
   return (
     <div className="bookingA_wrapper">
       <div className="bookingA_container">
@@ -210,25 +254,17 @@ export default function BookingContainer() {
                 return (
                   <tr id={i}>
                     <td>{i + 1}</td>
-                    <td>{booked.trip_name}</td>
-                    <td>{booked.full_name}</td>
-                    <td>{booked.contact_number}</td>
-                    <td>{booked.arrival_date.slice(0, 10)}</td>
+                    <td>{booked.packageName}</td>
+                    <td>{booked.name}</td>
+                    <td>{booked.contactNumber}</td>
+                    <td>{booked.arrivalDate.slice(0, 10)}</td>
                     <td>
-                      <MdRemoveRedEye
-                        onClick={() => {
-                          handleOpenView(booked.id);
-                        }}
-                      />
-                      {booked.seen ? (
-                        <AiFillDollarCircle style={{ color: "green" }} />
-                      ) : (
-                        <AiFillDollarCircle />
-                      )}
+                   
+                    
 
                       <MdDelete
                         onClick={() => {
-                          handleOpenDelete(booked.id);
+                          handleDelete(booked._id);
                         }}
                       />
                     </td>

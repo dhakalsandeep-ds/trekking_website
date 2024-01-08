@@ -13,7 +13,7 @@ import { dateNow } from "./src/utils/Date.js";
 import { aboutRouter } from "./src/Routes/aboutRouter.js";
 import expressAsyncHandler from "express-async-handler";
 import { successResponse } from "./src/helper/successResponse.js";
-import { About, Admin, Category, Contact, Inquiry, Product } from "./src/schema/model.js";
+import { About, Admin, Booking, Category, Contact, Inquiry, Product } from "./src/schema/model.js";
 import  mongoose  from "mongoose";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -449,6 +449,66 @@ app.get('/product/:productId', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// booking 
+app.post('/bookings', async (req, res) => {
+  const booking = new Booking(req.body);
+  try {
+    const newBooking = await booking.save();
+    res.status(201).json({message:"created sucessfully",data:newBooking});
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.get('/bookings', async (req, res) => {
+  try {
+    const bookings = await Booking.find();
+    res.json({message:"got all",data:bookings});
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/bookings/:id', async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (booking) {
+      res.json({message:"getted ",data:booking});
+    } else {
+      res.status(404).json({ message: 'Booking not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+app.patch('/bookings/:id', async (req, res) => {
+  try {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json({mesage:"updated ",data:updatedBooking});
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.delete('/bookings/:id', async (req, res) => {
+  try {
+    await Booking.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Booking deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+
 
 app.use("/teacher", teacherRouter);
 app.use("/student", studentRouter);

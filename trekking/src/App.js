@@ -44,6 +44,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/packages" element={<CategoryList />} />         
+          <Route path="/perProduct/:ID" element={<PerProductInfo/>}></Route>
           <Route path="*" element={<PageNotFound />} />
         </Route>
 
@@ -63,6 +64,7 @@ function App() {
           <Route path="products/add" element={<AddProduct />} />
           <Route path="products/edit/:tripID" element={<EditProduct />} />
           <Route path="inquiry" element={<Inquiry />} />
+          <Route path="booking/" element={<BookingDetails></BookingDetails>}></Route>
           </Route>
         </Route>
       </Routes>
