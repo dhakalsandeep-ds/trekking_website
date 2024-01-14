@@ -36,16 +36,17 @@ export default function AboutUsHome({istestiomonial}) {
       <div className="homeAboutUs_wrapper">
       <div className="homeAboutUs_container">
         <div className="homeAboutUs_leftContainer">
-          <h1>
+       
+        <h1>
            
-TESTIMONIALS <br></br>
- <span class="hide">Here is what our client says</span> 
-
-          </h1>
+           TESTIMONIALS <br></br>
+            <span class="hide">Here is what our client says</span> 
+           
+                     </h1>
         </div>
         <div className="homeAboutUs_rightContainer">
-          <Testimonial></Testimonial>
-       
+        <Testimonial></Testimonial>
+        
 
 
          
@@ -57,14 +58,14 @@ TESTIMONIALS <br></br>
 
   return (
     <div className="homeAboutUs_wrapper">
-      <div className="homeAboutUs_container">
-        <div className="homeAboutUs_leftContainer">
+      <div style={{width:"80%",margin:"auto",textAlign:"justify"}}>
+        {/* <div className="homeAboutUs_leftContainer">
           <h1 >
             WELCOME TO <br />
             <span class="hide"> Rocket Trekking Nepal</span> 
           </h1>
-        </div>
-        <div className="homeAboutUs_rightContainer">
+        </div> */}
+        {/* <div className="homeAboutUs_rightContainer"> */}
         
         <h3>Namaste & welcome to Nepal
 
@@ -87,7 +88,7 @@ Trekking can be as long or short, as easy or difficult as you wish. There are tw
           >
             <div className="goBTN" style={{backgroundColor:"#063970"}}>KNOW MORE</div>
           </Link>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

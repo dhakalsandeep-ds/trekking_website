@@ -14,10 +14,10 @@ export default function Homepage() {
       <Hero />
       
       
-      <AboutUsHome id="AboutUs"/>
+      {/* <AboutUsHome id="AboutUs"/> */}
 
       
-      <AboutUsHome istestiomonial={true}/>
+      {/* <AboutUsHome istestiomonial={true}/> */}
     </div>
   );
 }

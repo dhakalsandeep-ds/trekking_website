@@ -188,7 +188,7 @@ svg {
 
     .responsiveNav li:hover .active {
         background-color: #063970!important;
-        color: white;
+        color: var(--primary);
     }
 
 }

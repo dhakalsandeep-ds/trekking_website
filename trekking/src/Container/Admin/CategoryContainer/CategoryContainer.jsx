@@ -243,10 +243,20 @@ export default function CategoryContainer() {
       body: bodyContent,
       headers: headersList
     });
+    
+    console.log(response.status)
+    if(response.status === 202){
+      let data = await response.json();
 
-    let data = await response.json();
-    console.log(data);
-    fetchCategoryData()
+      console.log("inside 202")
+      console.log(data);
+      toast.success("added")
+      fetchCategoryData()
+    }else {
+      toast.error("something went wrong!")
+    }
+    console.log("end....")
+  
   }
   const handleDelete = async(id) => {
     let headersList = {
@@ -259,6 +269,7 @@ export default function CategoryContainer() {
      });
      
      let data = await response.json();
+     
      console.log(data,"deleted......");
      setCategoryData(prev=>prev.filter(p=>p._id !== id))
   }
@@ -325,6 +336,7 @@ export default function CategoryContainer() {
                         onClick={() => {
                           handleDelete(category._id);
                         }}
+                        
                       />
                     </td>
                   </tr>
@@ -354,6 +366,8 @@ export default function CategoryContainer() {
                 type="submit"
                 name="submit"
                 value="add"
+                class='button-contact'
+                style={{color:"white"}}
                 onClick={(e)=>handleAddCateogry(e)}
               // onChange={handleSubmit()}
               />
@@ -380,28 +394,12 @@ export default function CategoryContainer() {
                 onChange={(e)=>setEdit(e.target.value)}
               />
            
-             <input type="button" value="submit" onClick={handleEditSumbit} />
+             <input type="button" class="button-contact" style={{color:"white"}} value="submit" onClick={handleEditSumbit} />
             </div>
           </Box>
         </Modal>
 
-        {/* Delete Modal */}
-        <Modal
-          open={openDelete}
-          onClose={handleCloseDelete}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <h2>{soloCategoryData.title} </h2>
-            <h3>Are you sure want to delete this Category?</h3>
-            <BtnToClick
-              title="Delete"
-              customColor="red"
-              onclicking={() => onClickDeleteBTN(soloCategoryData.id)}
-            />
-          </Box>
-        </Modal>
+       
       </div>
     </div>
   );

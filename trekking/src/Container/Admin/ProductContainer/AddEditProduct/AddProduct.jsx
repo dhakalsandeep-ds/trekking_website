@@ -15,12 +15,27 @@ export default function AddProduct() {
   const navigate = useNavigate();
   const [tripCategory, setTripCategory] = useState("")
 
-  const [categoryData, setCategoryData] = useState("");
-  const [addProductDetails, setAddProductDetails] = useState({});
-  const [ckEditorDescription, setCkEditorDescription] = useState("");
-  const [ckEditorItinerary, setCkEditorItinerary] = useState("");
-  const [ckEditorCostIncludes, setCkEditorCostIncludes] = useState("");
-  const [ckEditorCostExcludes, setCkEditorCostExcludes] = useState("");
+  
+  const [addProductDetails, setAddProductDetails] = useState({
+    duration:"",
+    price:"",
+    imageUrl:"",
+    season:"",
+    destination:"",
+    category:""
+  });
+  const [durationError,setDurationError] = useState({isError:"",message:[]})
+  const [categoryError,setCategoryError] = useState({isError:"",message:[]})
+  const [headingError,setHeadingError] = useState({isError:"",message:[]})
+  const [priceError,setPriceError] = useState({isError:"",message:[]})
+  const [seasonError,setSeasonError] = useState({isError:"",message:[]})
+  const [imageUrlError,setImageUrlError] = useState({isError:"",message:[]})
+
+  // const changeDay = (e)=>{
+  //   if(/^\d+$/.test(addProductDetails.duration)){
+  //       setAddProductDetails(prev=>{...prev,})
+  //   }
+  // }
 
   const fetchCategoryData = async () => {
     let headersList = {
@@ -44,6 +59,46 @@ export default function AddProduct() {
 
   const onSubmitClick = async () => {
 
+    let errors = [];
+
+    // Validation checks
+    if (!addProductDetails.category) {
+      errors.push("Category is required");
+    }
+  
+    if (!addProductDetails.heading) {
+      errors.push("Heading is required");
+    }
+  
+    if (isNaN(addProductDetails.price) || addProductDetails.price.trim() === "") {
+      errors.push("Price must be a number and is required");
+    }
+  
+    if (!addProductDetails.imageUrl) {
+      errors.push("Image URL is required");
+    }
+  
+    if (isNaN(addProductDetails.duration) || addProductDetails.duration.trim() === "") {
+      errors.push("Duration must be a number and is required");
+    }
+  
+    if (!addProductDetails.season) {
+      errors.push("Season is required");
+    }
+  
+    // If there are any errors, set them and stop further execution
+    if (errors.length > 0) {
+      setCategoryError((prev) => ({ isError: errors.includes("Category is required"), message: errors.filter((error) => error.startsWith("Category")) }));
+      setHeadingError((prev) => ({ isError: errors.includes("Heading is required"), message: errors.filter((error) => error.startsWith("Heading")) }));
+      setPriceError((prev) => ({ isError: errors.includes("Price must be a number and is required"), message: errors.filter((error) => error.startsWith("Price")) }));
+      setImageUrlError((prev) => ({ isError: errors.includes("Image URL is required"), message: errors.filter((error) => error.startsWith("Image URL")) }));
+      setDurationError((prev) => ({ isError: errors.includes("Duration must be a number and is required"), message: errors.filter((error) => error.startsWith("Duration")) }));
+      setSeasonError((prev) => ({ isError: errors.includes("Season is required"), message: errors.filter((error) => error.startsWith("Season")) }));
+      return;
+    }
+    
+    
+
     let headersList = {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -66,13 +121,24 @@ export default function AddProduct() {
       body: bodyContent,
       headers: headersList
     });
-
-    let data = await response.json();
-    console.log(data, "product details..........");
-
-
-
-
+    console.log(response.status)
+    if(response.status === 200){
+      let data = await response.json();
+      console.log(data, "product details..........");
+  
+     console.log(data,"data.......")
+     toast.success(data.message)
+      setCategoryError({});
+      setHeadingError({});
+      setPriceError({});
+      setImageUrlError({});
+      setDurationError({});
+      setSeasonError({});
+    }else {
+      toast.error("something went wrong")
+    }
+    
+  
 
     // let menuItemData = new FormData();
     // menuItemData.append(
@@ -117,7 +183,7 @@ export default function AddProduct() {
   }, []);
 
   const onChangeInAddingData = (e) => {
-    setAddProductDetails({
+       setAddProductDetails({
       ...addProductDetails,
       [e.target.name]: e.target.value,
     });
@@ -180,6 +246,7 @@ export default function AddProduct() {
                         );
                       })}
                   </select>
+                  {categoryError.isError && categoryError.message.map(a=> <p> {a}</p>)}
                 </div>
                 
               </div>
@@ -197,6 +264,7 @@ export default function AddProduct() {
                     value={addProductDetails.duration}
                     onChange={onChangeInAddingData}
                   />
+                  {durationError.isError && durationError.message.map(a=> <p> {a}</p>)}
                 </div>
               </div>
 
@@ -212,6 +280,7 @@ export default function AddProduct() {
                     onChange={onChangeInAddingData}
                     value={addProductDetails.season}
                   />
+                  {seasonError.isError && seasonError.message.map(a=> <p> {a}</p>)}
                 </div>
               </div>
 
@@ -226,6 +295,7 @@ export default function AddProduct() {
                     value={addProductDetails.heading}
                     onChange={onChangeInAddingData}
                   />
+                  {headingError.isError && categoryError.message.map(a=> <p> {a}</p>)}
                 </div>
                 
               
@@ -248,6 +318,7 @@ export default function AddProduct() {
                     value={addProductDetails.price}
                     onChange={onChangeInAddingData}
                   />
+                  {priceError.isError && priceError.message.map(a=> <p> {a}</p>)}
                 </div>
               </div>
 
@@ -267,6 +338,7 @@ export default function AddProduct() {
                   value={addProductDetails.imageUrl}
                   onChange={onChangeInAddingData}
                 />
+                {imageUrlError.isError && imageUrlError.message.map(a=> <p> {a}</p>)}
               </div>
             </div>
 

@@ -344,6 +344,7 @@ app.post('/category',async (req,res)=>{
       await category.save()
       res.status(202).json({sucess:true,data:category})
   }catch(error){
+    console.log('error....')
     res.status(500).json({sucess:true,message:error.message})
   }
 })
@@ -411,7 +412,7 @@ app.get('/product/category/:categoryId', async (req, res) => {
 app.delete('/product/:productId', async (req, res) => {
   try {
       await Product.findByIdAndDelete(req.params.productId);
-      res.json({ message: 'Product deleted successfully' });
+      res.status(200).json({ message: 'Product deleted successfully' });
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
@@ -452,6 +453,7 @@ app.get('/product/:productId', async (req, res) => {
 
 // booking 
 app.post('/bookings', async (req, res) => {
+  console.log("inside bookings")
   const booking = new Booking(req.body);
   try {
     const newBooking = await booking.save();

@@ -17,7 +17,7 @@ svg {
 }
 
 .NavDiv_bg {
-    background-color: var(--primary);
+    background-color: #063970;
     /* opacity: 0; */
     height: 55px;
 }
@@ -60,14 +60,7 @@ svg {
     background: none;
 }
 
-.serachContainer {
-    width: 25%;
-    margin: auto;
-    padding: 0px 30px;
-    font-size: 24px;
-    color: white;
-    transition: all 0.5s;
-}
+
 
 .NavLinkContainer {
     width: calc(75% - 100px);
@@ -99,7 +92,7 @@ svg {
 }
 
 .Nav-li-unselect {
-    color: var(--nav-unselect);
+    color: #063970;
 }
 
 .NavLinkSubContainer li a {
@@ -110,7 +103,7 @@ svg {
 }
 
 .NavLinkSubContainer li .active {
-    background-color: var(--primary);
+    background-color: var#063970;
     color: white;
 }
 
@@ -189,8 +182,8 @@ svg {
     .responsiveNav {
         position: relative;
         padding: 5px 5px;
-        border-radius: 0px 0px 5px 5px;
-        background-color: var(--primary);
+        /* border-radius: 0px 0px 5px 5px; */
+        /* background-color: var(--primary); */
         border-left: 1px solid var(--dim-bg);
         /* -webkit-transition: height 4s width 4s ease-in-out; */
         transition: all 0.2s;
@@ -212,14 +205,14 @@ svg {
         /* margin-left: 2px !important; */
     }
 
-    .responsiveNav li:hover {
-        background-color: #154c79;
+    /* .responsiveNav li:hover { */
+        /* background-color: #154c79;
         color: var(--primary);
-    }
+    } */
 
     .responsiveNav li:hover .active {
-        background-color: var(--dim-bg);
-        color: black;
+        background-color:#063970;
+        color: white;
     }
 
 }
@@ -238,7 +231,5 @@ svg {
         transition: all 0.9s;
     }
 
-    .serachContainer {
-        display: none;
-    }
+    
 }

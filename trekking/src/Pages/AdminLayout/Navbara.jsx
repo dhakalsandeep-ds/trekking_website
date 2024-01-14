@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./Navbara.css";
+// import "./Navbarar.css"
 import { Links } from "../../Data/NavLinks";
 import { Link, NavLink } from "react-router-dom";
 // import SearchBar from "../SearchBar/SearchBar";
@@ -33,7 +34,7 @@ export default function Navbara() {
   return (
     <>
       <div
-        className={"NavDiv_wrapper NavDiv_bg"} style={{backgroundColor:"#154c79"}}
+        className={"NavDiv_wrapper NavDiv_bg"} style={{backgroundColor:"#063970"}}
       >
         
         <div className="NavDivContainer">
@@ -57,14 +58,14 @@ export default function Navbara() {
               <RxHamburgerMenu />
               </Link>
             </div>
-            <div className="NavLinkSubContainer" style={{backgroundColor:"#154c79"}} id="NavLinkSubContainer">
+            <div className="NavLinkSubContainer" style={{backgroundColor:"#063970"}} id="NavLinkSubContainer">
               {AdminNavLinks.map((Link) => {
                 return (
                   <li key={Link.Key}>
                     <NavLink
                       to={Link.Linkto}
                       className={
-                        changeStyle ? "Nav-li-unselect" : "Nav-li-textColor "
+                      "Nav-li-textColor "
                       }
                       onClick={() => {
                         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -80,7 +81,7 @@ export default function Navbara() {
                     <MdLogout
                       
                       className={
-                        changeStyle ? "Nav-li-unselect" : "Nav-li-textColor "
+                       "Nav-li-textColor "
                       }
                       onClick={logout}
                      

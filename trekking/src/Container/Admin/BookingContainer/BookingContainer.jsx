@@ -52,27 +52,27 @@ export default function BookingContainer() {
     let headersList = {
       "Accept": "*/*",
       "Content-Type": "application/json"
-     }
-     
+    }
+
     //  let bodyContent = JSON.stringify({
     //    "packageName":"shail",
     //    "name":"ramesh",
     //    "numberOfPeople":7,
     //    "contactNumber":985748393,
     //    "arrivalDate":"2/12/200"
-       
-       
+
+
     //  });
-     
-     let response = await fetch("http://localhost:8000/bookings", { 
-       method: "GET",
-       headers: headersList
-     });
-     
-     let data = await response.json();
-     console.log(data);
-     setBookingData(data.data)
-     
+
+    let response = await fetch("http://localhost:8000/bookings", {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data);
+    setBookingData(data.data)
+
 
     // try {
     //   const url = "/tripbooking";
@@ -174,6 +174,7 @@ export default function BookingContainer() {
       const result = await deleteData(url);
       if (result.status === 200) {
         toast.warn("Customer Booking Data deleted");
+
         fetchBookingData();
         handleCloseDelete();
       } else {
@@ -214,22 +215,36 @@ export default function BookingContainer() {
     setOpenDelete(false);
   };
 
-  const handleDelete = async(id)=>{
-    
-      console.log(id,'id...........')
-      let headersList = {
-        "Accept": "*/*",
-       }
-       
-       let response = await fetch(`http://localhost:8000/bookings/${id}`, { 
-         method: "DELETE",
-         headers: headersList
-       });
-       
-       let data = await response.json();
-      //  Toast.success(data.data.message)
-      setBookingData(bd=>bd.map(p=>p))
-       toast.success("deleted")
+  const handleDelete = async (id) => {
+
+    console.log(id, 'id...........')
+    let headersList = {
+      "Accept": "*/*",
+    }
+
+    let response = await fetch(`http://localhost:8000/bookings/${id}`, {
+      method: "DELETE",
+      headers: headersList
+    });
+    console.log(response, "response.....")
+    if(response.status === 200){
+      let data = await response.json();
+     
+     
+      toast.success("deleted")
+      setBookingData(bd =>{
+
+
+        console.log("before reuslt", bd)
+        const result = bd.filter(p => p._id !== id)
+        console.log(id,"id........")
+        console.log("after result",result)
+        return result
+      } )
+    } else {
+      toast.error("something went wrong")
+    }
+   
 
   }
 
@@ -248,7 +263,7 @@ export default function BookingContainer() {
               <th width="15%">Action</th>
             </tr>
 
-            {console.log("booked solo details : ", soloBookingData)}
+            
             {Array.isArray(bookingData) &&
               bookingData.map((booked, i) => {
                 return (
@@ -259,8 +274,8 @@ export default function BookingContainer() {
                     <td>{booked.contactNumber}</td>
                     <td>{booked.arrivalDate.slice(0, 10)}</td>
                     <td>
-                   
-                    
+
+
 
                       <MdDelete
                         onClick={() => {

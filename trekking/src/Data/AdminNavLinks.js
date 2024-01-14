@@ -35,4 +35,10 @@ export const AdminNavLinks = [
     Linkto: "/admin/inquiry",
     Logo: <MdQuestionMark />,
   },
+  {
+    Key: 9,
+    Title: "booking",
+    Linkto: "/admin/booking",
+    Logo: <MdQuestionMark />,
+  },
 ];

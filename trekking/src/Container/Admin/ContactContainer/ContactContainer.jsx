@@ -104,14 +104,14 @@ export default function ContactContainer() {
     <div className="field1">
       <label> Contact Info </label>
       {/* <input type="text" value={user.email} /> */}
-      <input placeholder="E-mail" value={email} onChange={(e)=>{handleEmail(e)}}/>
+      <input placeholder="Email" value={email} onChange={(e)=>{handleEmail(e)}}/>
       <p>
         {isEmailError.error && isEmailError.message.map((msg)=>{
           console.log("inside email error")
           return <span> {msg}</span>
         })}
       </p>
-      <input placeholder="Phone 000-000-0000" value={phone} onChange={(e)=>{handlePhone(e)}} />
+      <input placeholder="Phone" value={phone} onChange={(e)=>{handlePhone(e)}} />
       <p>
         {isPhoneError.error && isPhoneError.message.map((msg)=>{
           console.log("inside email error")
@@ -123,7 +123,7 @@ export default function ContactContainer() {
       <textarea placeholder="Physical location of the project" /> */}
     </div>
 
-    <button onClick={(e)=>{handleSubmit(e)}} type="submit" id="submitBtn" className="submitBtn">submit</button>
+    <button class="button-contact" onClick={(e)=>{handleSubmit(e)}} type="submit" id="submitBtn" className="submitBtn"  style={{height:"40px",width:"60px",backgroundColor: "#0095ff",color:"white"}}>submit</button>
   </form>
 
  

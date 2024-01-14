@@ -43,6 +43,26 @@ export default function ProductContainer() {
   }, []);
 
   
+const handleDelete = async(id) => {
+  let headersList = {
+    "Accept": "*/*"
+   }
+   
+   let response = await fetch(`http://localhost:8000/product/${id}`, { 
+     method: "DELETE",
+     headers: headersList
+   });
+   
+   let data = await response.json();
+   
+   console.log(data,"deleted......");
+  //  setCategoryData(prev=>prev.filter(p=>p._id !== id))
+  setActivityList(prev=>prev.filter(p=>p._id !== id))
+  console.log(activityList,"activity list");
+  
+}
+
+console.log("handle deltee.....",handleDelete)
 
   return (
     <div className="productA_wrapper">
@@ -57,7 +77,7 @@ export default function ProductContainer() {
             return (
               <div className="pac_productListContainer" key={i}>
               
-                <Product categoryId={activity._id} name={activity.name} />
+                <Product categoryId={activity._id} name={activity.name} handleDeletes={handleDelete} />
               </div>
             );
           })}
@@ -67,9 +87,41 @@ export default function ProductContainer() {
   );
 }
 
-function Product({ categoryId, name }) {
+function Product({ categoryId, name, handleDeletes }) {
   const navigate = useNavigate()
   const [products, setProducts] = useState([]);
+
+
+  const handleDelete = async(id) => {
+    let headersList = {
+      "Accept": "*/*"
+     }
+     
+     let response = await fetch(`http://localhost:8000/product/${id}`, { 
+       method: "DELETE",
+       headers: headersList
+     });
+     
+     if(response.status === 200){
+      let data = await response.json();
+     
+
+      console.log(data,"deleted......");
+     //  setCategoryData(prev=>prev.filter(p=>p._id !== id))
+     setProducts(prev=>prev.filter(p=>p._id !== id))
+     } else {
+      toast.error("somthing went wrong")
+     }
+
+    //  let data = await response.json();
+     
+
+    //  console.log(data,"deleted......");
+    // //  setCategoryData(prev=>prev.filter(p=>p._id !== id))
+    // setProducts(prev=>prev.filter(p=>p._id !== id))
+  
+    
+  }
 
   const fetchSoloActivity = async (id) => {
     try {
@@ -97,6 +149,8 @@ function Product({ categoryId, name }) {
   const handleEdit = (id)=>{
     navigate(`/admin/products/edit/${id}`)
 }
+
+
 
   return (
     <div className="inquiryA_wrapper">
@@ -136,6 +190,9 @@ function Product({ categoryId, name }) {
                         />
                      
                       <MdDelete
+                      onClick={()=>{
+                        handleDelete(inquiry._id)
+                      }}
 
                       />
                     </td>
