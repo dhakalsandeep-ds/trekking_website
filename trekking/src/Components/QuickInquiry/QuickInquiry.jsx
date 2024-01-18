@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./QuickInquiry.css";
-import { storeData } from "../../constants/apiService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,9 +14,9 @@ export default function QuickInquiry() {
    const [isNameError,setIsNameError] = useState({error:false,message:[]})
    
    const handleEmail = (e) => {
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    if(e.target.value === "" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
      console.log('inside handle email')
-     setIsEmailError({error:true,message:["email is invalid"]})
+     setIsEmailError({error:true,message:["email is invalid and required"]})
     }else{
      setIsEmailError({error:false,message:[]})
     }
@@ -26,9 +25,9 @@ export default function QuickInquiry() {
    }
 
    const handlePhone = (e) => {
-    if(!/^[0-9]{8}$|^[0-9]{10}$/.test(phone)){
+    if(e.target.value || !/^[0-9]{8}$|^[0-9]{10}$/.test(phone)){
      console.log('inside handle phone')
-     setIsPhoneError({error:true,message:["must not contain letter and must be of 8 or 10 digits"]})
+     setIsPhoneError({error:true,message:["must not contain letter and must be of 8 or 10 digits and is required"]})
     }else{
      setIsPhoneError({error:false,message:[]})
     }
@@ -37,9 +36,9 @@ export default function QuickInquiry() {
    }
 
    const handleName = (e) => {
-    if(!/^[^\d]*\d[^\d]*$/.test(phone)){
+    if( e.target.value === "" || !/^[A-Za-z ]+$/.test(e.target.value)){
      console.log('inside handle phone')
-     setIsNameError({error:true,message:["name can contain only letter and space"]})
+     setIsNameError({error:true,message:["name can contain only letter and space and is required"]})
     }else{
      setIsNameError({error:false,message:[]})
     }
@@ -47,9 +46,9 @@ export default function QuickInquiry() {
      setName(e.target.value)
    }
 
-   const handleSubmit =(e) => {
+   const handleSubmit = async(e) => {
     e.preventDefault()
-    async function call(){
+   
       let headersList = {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -74,16 +73,19 @@ export default function QuickInquiry() {
        if(data.sucess === true){
         toast.success(data.message)
        }else {
+        console.log(data)
         toast.error(data.message)
        }
        
       }catch(e){
         console.log(e)
         console.log(e.message)
+        console.log("insied toast error")
         toast.error(e)
       }
-    }
-    call()
+    
+  
+ 
    }
 
   return (
@@ -100,7 +102,7 @@ export default function QuickInquiry() {
          <p>
         {isNameError.error && isNameError.message.map((msg)=>{
           console.log("inside email error")
-          return <span> {msg}</span>
+          return <span style={{color:"red"}}> {msg}</span>
         })}
       </p>
         <input
@@ -113,7 +115,7 @@ export default function QuickInquiry() {
          <p>
         {isEmailError.error && isEmailError.message.map((msg)=>{
           console.log("inside email error")
-          return <span> {msg}</span>
+          return <span style={{color:"red"}}> {msg}</span>
         })}
       </p>
         <input
@@ -125,7 +127,7 @@ export default function QuickInquiry() {
         />
           {isPhoneError.error && isPhoneError.message.map((msg)=>{
           console.log("inside email error")
-          return <span> {msg}</span>
+          return <span style={{color:"red"}}> {msg}</span>
         })}
         <textarea
           placeholder="Message for us"
@@ -135,6 +137,7 @@ export default function QuickInquiry() {
         />
         <div
           className="goBTN"
+          style={{backgroundColor: "#0095ff"}}
           onClick={(e) => {
             handleSubmit(e);
           }}

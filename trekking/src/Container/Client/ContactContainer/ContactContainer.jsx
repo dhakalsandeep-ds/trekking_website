@@ -3,7 +3,7 @@ import "./ContactContainer.css";
 import QuickInquiry from "../../../Components/QuickInquiry/QuickInquiry";
 import { MdLocationOn, MdCall, MdEmail } from "react-icons/md";
 import ImgWithDetail from "../../../Components/ImgWithDetail/ImgWithDetail";
-import { getAllData } from "../../../constants/apiService";
+
 
 export default function ContactContainer() {
   const [contactData, setContactData] = useState({
@@ -30,25 +30,6 @@ export default function ContactContainer() {
      console.log(data,"form contact conainer client");
      setContactData({email:data.email,contact_number:data.phoneNumber,address:data.address})
      
-
-
-
-
-    // try {
-    //   const url = "/contact/1";
-    //   const result = await getAllData(url);
-    //   if (result.status === 200) {
-    //     setContactData({
-    //       contact_number: result.data.data.contact_number,
-    //       address: result.data.data.address,
-    //       email: result.data.data.email,
-    //     });
-    //   } else {
-    //     console.log(result);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
 
   useEffect(() => {
@@ -58,9 +39,7 @@ export default function ContactContainer() {
   return (
     <div className="contactUs_wrapper">
       <div className="contactUs_container">
-        {/* <div className="contactUs_title">
-          <h1>ABOUT US</h1>
-        </div> */}
+     
         <div className="contactUs_content">
           <div className="contactUs_details">
             <ImgWithDetail
@@ -74,6 +53,7 @@ export default function ContactContainer() {
               staticInfo="CONTACT NUMBER"
               dynamicInfo={contactData.contact_number}
             />
+
 
             <ImgWithDetail
               icon={<MdEmail />}

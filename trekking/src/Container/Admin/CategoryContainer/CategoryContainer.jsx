@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CategoryContainer.css";
-import BtnToClick from "../../../Components/BtnToClick/BtnToClick";
+
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
 
 import Box from "@mui/material/Box";
@@ -37,7 +37,7 @@ export default function CategoryContainer() {
   const [soloCategoryData, setSoloCategoryData] = useState({});
   const [addCategoryData, setAddCategoryData] = useState({ priority: 1 });
 
-  // const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 
   const fetchCategoryData = async () => {
 
@@ -60,21 +60,7 @@ export default function CategoryContainer() {
     setCategoryData(data.data)
 
 
-    // try {
-    //   const url = "/tripcategory";
-    //   const result = await getAllData(url);
-
-    //   if (result.status === 200) {
-    //     const resData = result.data.data.results;
-    //     setCategoryData(resData);
-    //   } else {
-    //     toast.error("Some error occurred");
-    //     console.log(result);
-    //   }
-    // } catch (err) {
-    //   toast.error("Some error occurred");
-    //   console.log(err);
-    // }
+    
   };
 
   const fetchSoloCategoryData = async (id) => {
@@ -127,104 +113,8 @@ export default function CategoryContainer() {
     setOpenDelete(false);
   };
 
-  const onChange = (e) => {
-    setSoloCategoryData({
-      ...soloCategoryData,
-      [e.target.name]: e.target.value,
-    });
-  };
+ 
 
-  const onChangeInAdding = (e) => {
-
-    if (e.target.name != 'title') {
-      if (!["image/jpeg", "image/png", "image/jpg"].includes(e.target.files[0].type)) {
-        toast.error("file extenison not allowed")
-        e.target.value = null;
-      }
-
-      // const result = "http://apicall.com" // api call
-      // api mock 
-
-
-      const result = { url: "https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg" }
-
-
-      setAddCategoryData({
-        ...addCategoryData,
-        [e.target.name]: result
-      });
-
-
-
-      return
-
-    }
-
-    setAddCategoryData({
-      ...addCategoryData,
-      [e.target.name]: e.target.value,
-    });
-
-  };
-
-
-
-  const onClickAddBTN = async () => {
-    try {
-      const url = "/tripcategory";
-      const result = await storeData(url, addCategoryData);
-      if (result.status === 201) {
-        console.log("success", result);
-        toast.success("New Category is added.");
-        fetchCategoryData();
-        handleCloseAdd();
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
-
-  const onClickUpdateBTN = async (updateID) => {
-    try {
-      const url = "/tripcategory/" + updateID;
-      const result = await updateData(url, soloCategoryData);
-      if (result.status === 201) {
-        console.log("success", result);
-        toast.success("Category has been updated");
-        fetchCategoryData();
-        handleCloseEdit();
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
-
-  const onClickDeleteBTN = async (updateID) => {
-    try {
-      const url = "/tripcategory/" + updateID;
-      const result = await deleteData(url);
-      if (result.status === 200) {
-        console.log("success", result);
-        toast.warn("Category is deleted.");
-        fetchCategoryData();
-        handleCloseDelete();
-      } else {
-        toast.error("Some error occurred");
-        console.log("failed", result);
-      }
-    } catch (err) {
-      toast.error("Some error occurred");
-      console.log(err);
-    }
-  };
 
   const handleAddCateogry = async (e) => {
     e.preventDefault()

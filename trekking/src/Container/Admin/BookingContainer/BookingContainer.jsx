@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./BookingContainer.css";
 import BtnToClick from "../../../Components/BtnToClick/BtnToClick";
-import { MdRemoveRedEye, MdDelete } from "react-icons/md";
-import { AiFillDollarCircle } from "react-icons/ai";
+
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -14,6 +13,7 @@ import {
   updateData,
 } from "../../../constants/apiService";
 import { useEffect } from "react";
+import { MdDelete } from "react-icons/md";
 
 const viewStyle = {
   position: "absolute",
@@ -54,15 +54,7 @@ export default function BookingContainer() {
       "Content-Type": "application/json"
     }
 
-    //  let bodyContent = JSON.stringify({
-    //    "packageName":"shail",
-    //    "name":"ramesh",
-    //    "numberOfPeople":7,
-    //    "contactNumber":985748393,
-    //    "arrivalDate":"2/12/200"
 
-
-    //  });
 
     let response = await fetch("http://localhost:8000/bookings", {
       method: "GET",
@@ -74,17 +66,7 @@ export default function BookingContainer() {
     setBookingData(data.data)
 
 
-    // try {
-    //   const url = "/tripbooking";
-    //   const result = await getAllData(url);
-    //   if (result.status === 200) {
-    //     setBookingData(result.data.data.results);
-    //   } else {
-    //     toast.error("Some error occurred");
-    //   }
-    // } catch (err) {
-    //   toast.error("Some error occurred");
-    // }
+   
   };
 
   const fetchCategoryData = async (categoryId) => {
@@ -124,32 +106,7 @@ export default function BookingContainer() {
     }
   };
 
-  // const fetchAllCategoryData = async () => {
-  //   try {
-  //     const url = "/tripinfo/";
-  //     const result = await getAllData(url);
-  //     if (result.status === 200) {
-  //       const datas = result.data.data.results;
-  //       datas.map((data) => {
-  //         setCategoryAllData((prevCategoryAllData) => {
-  //           return { ...prevCategoryAllData, [data.id]: data.heading };
-  //         });
-  //       });
-  //     } else {
-  //       toast.error("Some error occurred");
-  //     }
-  //   } catch (err) {
-  //     toast.error("Some error occurred");
-  //   }
-  // };
-
-  // const categoryChecker = (category_id) => {
-  //   for (const [key, value] of Object.entries(categoryAllData)) {
-  //     if (key == category_id) {
-  //       return value;
-  //     }
-  //   }
-  // };
+  
 
   const amountPaid = async (bookedID) => {
     try {
@@ -197,19 +154,13 @@ export default function BookingContainer() {
     fetchBookingData();
   }, []);
 
-  const handleOpenView = (id) => {
-    fetchSoloBookingData(id);
-    setOpenView(true);
-  };
+
   const handleCloseView = () => {
     setSoloBookingData();
     setOpenView(false);
   };
 
-  const handleOpenDelete = (id) => {
-    setDeleteId(id);
-    setOpenDelete(true);
-  };
+ 
   const handleCloseDelete = () => {
     setDeleteId("");
     setOpenDelete(false);

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function ProductCard(props) {
   const { img, title, duration, link, tLink, key } = props;
   return (
-    <div className="productCard_wrapper" key={key}>
+    <div className="productCard_wrapper" key={key} >
       <div className="productCard_container">
         <img src={img} alt="" />
         <div className="productCard_contents">

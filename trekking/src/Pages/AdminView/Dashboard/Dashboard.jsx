@@ -1,6 +1,5 @@
 import React from "react";
 import "./Dashboard.css";
-import SocialMediaContainer from "../../../Container/Admin/SocialMediaContainer/SocialMediaContainer";
 import ContactContainer from "../../../Container/Admin/ContactContainer/ContactContainer";
 
 export default function Dashboard() {

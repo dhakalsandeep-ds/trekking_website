@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import "./PerProductContainer.css";
-import ProductBookMenu from "../../../Components/ProductBookMenu/ProductBookMenu";
-import ImgWithDetail from "../../../Components/ImgWithDetail/ImgWithDetail";
 
-import { FaRegClock, FaCloudSun } from "react-icons/fa";
-import { MdDirectionsWalk } from "react-icons/md";
-import HTMLReactParser from "html-react-parser";
 import { toast } from 'react-toastify'
 
 export default function PerProductContainer(props) {
@@ -127,27 +122,6 @@ export default function PerProductContainer(props) {
     } else {
       toast.error("something went wrong")
     }
-
-
-
-
-
-
-
-    // console.log(id,'id...........')
-    // let headersList = {
-    //   "Accept": "*/*",
-    //  }
-
-    //  let response = await fetch(`http://localhost:8000/bookings/${id}`, { 
-    //    method: "DELETE",
-    //    headers: headersList
-    //  });
-
-    //  let data = await response.json();
-    //  Toast.success(data.data.message)
-
-
   }
 
 

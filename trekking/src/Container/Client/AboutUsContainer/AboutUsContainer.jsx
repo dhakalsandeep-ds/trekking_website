@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./AboutUsContainer.css";
-import QuickInquiry from "../../../Components/QuickInquiry/QuickInquiry";
+
 import { getAllData } from "../../../constants/apiService";
 import HTMLReactParser from "html-react-parser";
 

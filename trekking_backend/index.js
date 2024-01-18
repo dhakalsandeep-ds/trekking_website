@@ -1,19 +1,16 @@
 import express, { json } from "express";
 import { connectDb } from "./src/connectdb/connectdb.js";
-import { studentRouter } from "./src/Routes/studentRouter.js";
-import { teacherRouter } from "./src/Routes/teacherRouter.js";
-import attendanceRouter from "./src/Routes/attendanceRouter.js";
-import adminRouter from "./src/Routes/adminRouter.js";
+
 import cors from "cors";
-import { errorMiddleware } from "./src/helper/errorMiddleware.js";
-import { HttpStatus, PORT } from "./src/config/constant.js";
-import { helperRouter } from "./src/Routes/helperRouter.js";
-import { removeExpiredToken } from "./src/utils/token.js";
-import { dateNow } from "./src/utils/Date.js";
-import { aboutRouter } from "./src/Routes/aboutRouter.js";
-import expressAsyncHandler from "express-async-handler";
-import { successResponse } from "./src/helper/successResponse.js";
-import { About, Admin, Booking, Category, Contact, Inquiry, Product } from "./src/schema/model.js";
+
+import { PORT } from "./src/config/constant.js";
+
+
+
+
+
+
+import {  Admin, Booking, Category, Contact, Inquiry, Product } from "./src/schema/model.js";
 import  mongoose  from "mongoose";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -21,7 +18,7 @@ import bodyParser from 'body-parser'
 
 let app = new express();
 connectDb();
-// removeExpiredToken()
+
 
 app.use(cors());
 app.use(bodyParser.json())
@@ -137,80 +134,6 @@ app.get('/user',authMiddleware,async (req,res)=>{
 })
 
 
-// app.use((req,res,next)=>{
-//   console.log("Request Received:"+req.method+" "+req.url)
-//   next()
-// })
-// app.get("/about",expressAsyncHandler(
-//   async (req, res, next) => {
-   
-//     var ans
-//    console.log(req.body,",,,,,,,,,,,,,,,,,,,")
-//    About.find().then(docus => {
-    
-//     console.log(docus,"..............................")
-//     res.status(200).json({
-//       result:docus,
-//       success: true,
-//       mesage:"goal all",
-      
-//     });
-//    })
-
- 
-
-//     // let response = {
-//     //   res,
-//     //   result: { id: ans },
-//     //   message: "Password Changed Successfully",
-//     //   statusCode: HttpStatus.OK,
-//     // };
-
-//     // successResponse(response);
-//   }
-// ))
-
-// app.post("/about",expressAsyncHandler(
-//     async (req, res, next) => {
-//      console.log(req.body,",,,,,,,,,,,,,,,,,,,")
-//     //  const query = new mongoose.ObjectId(req.params.id)
-//     //   const about = new About({
-//     //     "about":req.body.data
-//     //   })
-//     //   about.save().catch(err=>console.log("eroro")).then(doc=>console.log(doc))
-
-//     const updateDocument = await About.findOneAndUpdate({
-//       _id:
-//     })
-//       let response = {
-//         res,
-//         result: { id: teacherId },
-//         message: "Password Changed Successfully",
-//         statusCode: HttpStatus.OK,
-//       };
-  
-//       successResponse(response);
-//     }
-//   ))
-
-// app.use("/", helperRouter);
-
-// app.get("/about",expressAsyncHandler(
-//   async (req, res, next) => {
-   
-//     var ans
-//    console.log(req.body,",,,,,,,,,,,,,,,,,,,")
-//    About.find().then(docus => {
-    
-//     console.log(docus,"..............................")
-//     res.status(200).json({
-//       result:docus,
-//       success: true,
-//       mesage:"goal all",
-      
-//     });
-//    })
-
 app.post("/contact", async (req,res) => {
      console.log(req.body,"....................")
      const {email,contact,location} = req.body
@@ -226,7 +149,7 @@ app.post("/contact", async (req,res) => {
       } else {
         // If not exists, create a new document
         await Contact.create({email:email,phoneNumber:parseInt(contact),address:location});
-        res.status(201).send({message:"created sucesfully"});
+        res.status(200).send({message:"created sucesfully"});
       }
     } catch (error) {
       console.error(error);
@@ -269,7 +192,7 @@ app.post('/inquiry', async (req, res) => {
     res.status(201).json({ sucess:true, message: 'Inquiry created successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ sucess: false,error: 'Internal Server Error' });
+    res.status(500).json({ sucess: false,message: error._message });
   }
 });
 
@@ -431,7 +354,7 @@ app.put('/product/:productId', async (req, res) => {
           return res.status(404).json({ message: 'Product not found' });
       }
 
-      res.json({data:updatedProduct});
+      res.status(200).json({message:"updated"});
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
@@ -445,7 +368,7 @@ app.get('/product/:productId', async (req, res) => {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    res.json({ data: product });
+    res.status(200).json({data:product, message:"updated" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -508,17 +431,6 @@ app.delete('/bookings/:id', async (req, res) => {
   }
 });
 
-
-
-
-
-app.use("/teacher", teacherRouter);
-app.use("/student", studentRouter);
-app.use("/attendance", attendanceRouter);
-app.use("/admin", adminRouter);
-
-app.use(express.static("./public"));
-app.use(errorMiddleware);
 
 app.listen(PORT, () => {
   console.log(`app is listening at port number ${PORT}`);

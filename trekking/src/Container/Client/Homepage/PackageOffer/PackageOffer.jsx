@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./PackageOffer.css";
-// import SearchMenu from "../../../../Components/SearchMenu/SearchMenu";
 import ProductCard from "../../../../Components/ProductCard/ProductCard";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { toast } from "react-toastify";
-import { getAllData } from "../../../../constants/apiService";
 
 const responsive = {
   superLargeDesktop: {
@@ -35,7 +31,7 @@ const responsive = {
 
 
 export default function PackageOffer() {
-  const [activityList, setActivityList] = useState([{ name: "man" }, { name: "girl" }]);
+  const [activityList, setActivityList] = useState([{ name: "no data" }]);
 
 
 
@@ -78,7 +74,7 @@ export default function PackageOffer() {
   return (
     <>
      {Array.isArray(activityList) && activityList.map((p)=>{
-       return <Product categoryId={p._id} name={p.name}></Product>
+       return <div > <Product categoryId={p._id} name={p.name}></Product> </div>
      })}
     </>
   );
@@ -113,14 +109,14 @@ function Product({ categoryId,name}) {
 
 
   return (
-    <div className="packageOffer_wrapper" id="packageOffer">
+   
     <div className="packageOffer_container">
       <div className="packageOffer_title">
         <h1>{name}</h1>
       </div>
   
-      <div className="packageOffer_collection">
-        <Carousel responsive={responsive}>
+
+        <Carousel responsive={responsive} style={{border:"1px solid black"}}>
           {Array.isArray(products) &&
             products.map((data, i) => {
             
@@ -137,17 +133,9 @@ function Product({ categoryId,name}) {
               );
             })}
         </Carousel>
-      </div>
+    
     </div>
-  </div>
+  
   )
 
-  // return (
-  //   <div className="pac_productList" style={{ display: "grid" }}>
-  //     {Array.isArray(products) &&
-  //       products.map((product, j) => (
-  //         <ProductCard key={j} img={product.image} title={product.heading} />
-  //       ))}
-  //   </div>
-  // );
 }

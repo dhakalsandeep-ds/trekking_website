@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import BtnToClick from "../../../Components/BtnToClick/BtnToClick";
-import "./ProductContainer.css";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
 
-import { getAllData } from "../../../constants/apiService";
-import { MdExpandMore, MdExpandLess, MdRemoveRedEye, MdDelete } from "react-icons/md";
+import "./ProductContainer.css";
+
+
+import {  MdRemoveRedEye, MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { NavLink,useNavigate } from "react-router-dom";
 
@@ -111,16 +110,7 @@ function Product({ categoryId, name, handleDeletes }) {
      setProducts(prev=>prev.filter(p=>p._id !== id))
      } else {
       toast.error("somthing went wrong")
-     }
-
-    //  let data = await response.json();
-     
-
-    //  console.log(data,"deleted......");
-    // //  setCategoryData(prev=>prev.filter(p=>p._id !== id))
-    // setProducts(prev=>prev.filter(p=>p._id !== id))
-  
-    
+     }    
   }
 
   const fetchSoloActivity = async (id) => {
@@ -205,12 +195,4 @@ function Product({ categoryId, name, handleDeletes }) {
     </div>
   )
 
-  // return (
-  //   <div className="pac_productList" style={{ display: "grid" }}>
-  //     {Array.isArray(products) &&
-  //       products.map((product, j) => (
-  //         <ProductCard key={j} img={product.image} title={product.heading} />
-  //       ))}
-  //   </div>
-  // );
 }

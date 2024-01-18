@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./AddProduct.css";
 import HeaderDisplay from "../../../../Components/HeaderDisplay/HeaderDisplay";
 
-import { FaRegClock, FaCloudSun, FaDollarSign } from "react-icons/fa";
-import { MdDirectionsWalk } from "react-icons/md";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { getAllData, storeData } from "../../../../constants/apiService";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function AddProduct() {
-  const navigate = useNavigate();
   const [tripCategory, setTripCategory] = useState("")
 
   
@@ -31,11 +24,7 @@ export default function AddProduct() {
   const [seasonError,setSeasonError] = useState({isError:"",message:[]})
   const [imageUrlError,setImageUrlError] = useState({isError:"",message:[]})
 
-  // const changeDay = (e)=>{
-  //   if(/^\d+$/.test(addProductDetails.duration)){
-  //       setAddProductDetails(prev=>{...prev,})
-  //   }
-  // }
+
 
   const fetchCategoryData = async () => {
     let headersList = {
@@ -140,42 +129,7 @@ export default function AddProduct() {
     
   
 
-    // let menuItemData = new FormData();
-    // menuItemData.append(
-    //   "categoryId",
-    //   addProductDetails.TripCategory
-    // ? addProductDetails.TripCategory
-    //     : categoryData[0].id.toString()
-    // );
-    // menuItemData.append("heading", addProductDetails.heading);
-    // menuItemData.append("image", addProductDetails.image);
-    // menuItemData.append("duration", addProductDetails.duration);
-    // menuItemData.append("trip_grade", addProductDetails.trip_grade);
-    // menuItemData.append("seasons", addProductDetails.seasons);
-    // menuItemData.append("price", addProductDetails.price);
-    // menuItemData.append("description", ckEditorDescription);
-    // menuItemData.append("itinerary", ckEditorItinerary);
-    // menuItemData.append("cost_includes", ckEditorCostIncludes);
-    // menuItemData.append("cost_excludes", ckEditorCostExcludes);
-    // menuItemData.append("overview", "overview");
-
-
-
-    // try {
-    //   const url = "/tripinfo";
-    //   const result = await storeData(url, menuItemData);
-    //   if (result.status === 200) {
-    //     console.log("success product", result);
-    //     navigate("/admin/products");
-    //     toast.success("New Product is added.");
-    //   } else {
-    //     toast.error("Some error occurred");
-    //     console.log("failed product", result);
-    //   }
-    // } catch (err) {
-    //   toast.error("Some error occurred");
-    //   console.log(err);
-    // }
+   
   };
 
   useEffect(() => {
@@ -190,23 +144,7 @@ export default function AddProduct() {
 
   };
 
-  const fileHandle = (e) => {
-    console.log(e.target.files[0].type)
-    if (!["image/jpeg", "image/png", "image/jpg"].includes(e.target.files[0].type)) {
-      toast.error("file extenison not allowed")
-      e.target.value = null;
-    }
-
-    // const result = "http://apicall.com" // api call
-    // api mock 
-    const result = { url: "https://media.wired.com/photos/5b8999943667562d3024c321/master/w_1920,c_limit/trash2-01.jpg" }
-
-
-    setAddProductDetails({
-      ...addProductDetails,
-      "image": result.url,
-    });
-  }
+  
 
   return (
     <div className="addProduct_wrapper">
@@ -221,7 +159,7 @@ export default function AddProduct() {
         isEdit={true}
       />
       <div className="addProduct_container">
-        <h1 style={{margin:"auto",width:"60%",margin:"10px"}}>Edit Package</h1>
+        <h1 style={{margin:"auto",width:"60%"}}>Edit Package</h1>
         <div className="addProduct_content">
           <form action="/">
              
@@ -246,7 +184,7 @@ export default function AddProduct() {
                         );
                       })}
                   </select>
-                  {categoryError.isError && categoryError.message.map(a=> <p> {a}</p>)}
+                  {categoryError.isError && categoryError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
                 
               </div>
@@ -264,7 +202,7 @@ export default function AddProduct() {
                     value={addProductDetails.duration}
                     onChange={onChangeInAddingData}
                   />
-                  {durationError.isError && durationError.message.map(a=> <p> {a}</p>)}
+                  {durationError.isError && durationError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
               </div>
 
@@ -280,7 +218,7 @@ export default function AddProduct() {
                     onChange={onChangeInAddingData}
                     value={addProductDetails.season}
                   />
-                  {seasonError.isError && seasonError.message.map(a=> <p> {a}</p>)}
+                  {seasonError.isError && seasonError.message.map(a=> <p style={{color:'red'}}> {a}</p>)}
                 </div>
               </div>
 
@@ -295,7 +233,7 @@ export default function AddProduct() {
                     value={addProductDetails.heading}
                     onChange={onChangeInAddingData}
                   />
-                  {headingError.isError && categoryError.message.map(a=> <p> {a}</p>)}
+                 
                 </div>
                 
               
@@ -318,7 +256,7 @@ export default function AddProduct() {
                     value={addProductDetails.price}
                     onChange={onChangeInAddingData}
                   />
-                  {priceError.isError && priceError.message.map(a=> <p> {a}</p>)}
+                  {priceError.isError && priceError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
               </div>
 
@@ -338,27 +276,10 @@ export default function AddProduct() {
                   value={addProductDetails.imageUrl}
                   onChange={onChangeInAddingData}
                 />
-                {imageUrlError.isError && imageUrlError.message.map(a=> <p> {a}</p>)}
+                {imageUrlError.isError && imageUrlError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
               </div>
             </div>
-
-            <div className="divFlex">
-             
-
-
-
-             
-
-             
-            </div>
-
-
-
-
-
-
-
-            <input
+                   <input
               type="submit"
               value="Add Product"
               id="BtnToSubmit"

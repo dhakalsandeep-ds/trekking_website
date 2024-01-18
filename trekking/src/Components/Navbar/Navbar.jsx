@@ -2,25 +2,18 @@ import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { Links } from "../../Data/NavLinks";
 import { Link, NavLink } from "react-router-dom";
-// import SearchBar from "../SearchBar/SearchBar";
-import logo from "../../assets/icon/logo_main.png";
+
 import logos from "../../assets/travel-svgrepo-com.svg"
-import { AdminNavLinks } from "../../Data/AdminNavLinks";
+
 import { MdLogout} from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import AuthContext from "../../AuthState";
 
 export default function Navbar() {
   const {token,logout} = useContext(AuthContext)
-  const [changeStyle, setChangeStyle] = useState(false);
-  const changeColor = () => {
-    if (window.scrollY >= 100) {
-      setChangeStyle(true);
-    } else {
-      setChangeStyle(false);
-    }
-  };
-  window.addEventListener("scroll", changeColor);
+
+ 
+
 
   const makeResponsive = () => {
     let x = document.getElementById("NavLinkSubContainer");

@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./AddProduct.css";
 import HeaderDisplay from "../../../../Components/HeaderDisplay/HeaderDisplay";
 
-import { FaRegClock, FaCloudSun, FaDollarSign } from "react-icons/fa";
-import { MdDirectionsWalk } from "react-icons/md";
 
 
-import BtnToClick from "../../../../Components/BtnToClick/BtnToClick";
-import { useNavigate, useParams } from "react-router-dom";
+
+
+
+import {  useParams } from "react-router-dom";
 
 
 
 import { toast } from "react-toastify";
-import ProductDetails from "../../../../Pages/AdminView/ProductDetails/ProductDetails";
+
 
 
 
@@ -22,12 +22,21 @@ export default function EditProduct() {
 
 
   const [tripCategory,setTripCategory] = useState("")
-  const [addProductDetails, setAddProductDetails] = useState({category: "",
+  const [addProductDetails, setAddProductDetails] = useState({
+  category: "",
   heading: "",
   price: "",
   imageUrl: "",
   duration: "",
   season: ""});
+
+
+  const [durationError,setDurationError] = useState({isError:"",message:[]})
+  const [categoryError,setCategoryError] = useState({isError:"",message:[]})
+  const [headingError,setHeadingError] = useState({isError:"",message:[]})
+  const [priceError,setPriceError] = useState({isError:"",message:[]})
+  const [seasonError,setSeasonError] = useState({isError:"",message:[]})
+  const [imageUrlError,setImageUrlError] = useState({isError:"",message:[]})
   
 
   const fetchCategoryData = async () => {
@@ -52,6 +61,45 @@ export default function EditProduct() {
 
   const onSubmitClick = async () => {
 
+    let errors = [];
+
+    // Validation checks
+    if (!addProductDetails.category) {
+      errors.push("Category is required");
+    }
+  
+    if (!addProductDetails.heading) {
+      errors.push("Destination is required");
+    }
+  
+    if (isNaN(addProductDetails.price) || addProductDetails.price.trim() === "") {
+      errors.push("Price must be a number and is required");
+    }
+  
+    if (!addProductDetails.imageUrl) {
+      errors.push("Image URL is required");
+    }
+  
+    console.log(addProductDetails.duration,typeof(addProductDetails.duration))
+    if (isNaN(addProductDetails.duration) || addProductDetails.duration === "") {
+      errors.push("Duration must be a number and is required");
+    }
+  
+    if (!addProductDetails.season) {
+      errors.push("Season is required");
+    }
+  
+    // If there are any errors, set them and stop further execution
+    if (errors.length > 0) {
+      setCategoryError((prev) => ({ isError: errors.includes("Category is required"), message: errors.filter((error) => error.startsWith("Category")) }));
+      setHeadingError((prev) => ({ isError: errors.includes("Destination is required"), message: errors.filter((error) => error.startsWith("Destination")) }));
+      setPriceError((prev) => ({ isError: errors.includes("Price must be a number and is required"), message: errors.filter((error) => error.startsWith("Price")) }));
+      setImageUrlError((prev) => ({ isError: errors.includes("Image URL is required"), message: errors.filter((error) => error.startsWith("Image URL")) }));
+      setDurationError((prev) => ({ isError: errors.includes("Duration must be a number and is required"), message: errors.filter((error) => error.startsWith("Duration")) }));
+      setSeasonError((prev) => ({ isError: errors.includes("Season is required"), message: errors.filter((error) => error.startsWith("Season")) }));
+      return;
+    }
+
     let headersList = {
       "Accept": "*/*",
  
@@ -68,15 +116,29 @@ export default function EditProduct() {
       "season": addProductDetails.season
 
     });
+   
+    try {
+      let response = await fetch(`http://localhost:8000/product/${tripID}`, {
+        method: "PUT",
+        body: bodyContent,
+        headers: headersList
+      });
+        let data
+      if(response.status === 200){
+        
+        data = await response.json();
+        
+        toast.success(data.message)
+      }else {
+        toast.error(data.message)
+      }
+      
 
-    let response = await fetch(`http://localhost:8000/product/${tripID}`, {
-      method: "PUT",
-      body: bodyContent,
-      headers: headersList
-    });
+    }catch(e){
+             toast.error("something went wrong")
+    }
 
-    let data = await response.json();
-    console.log(data, "updated ifno of precut.");
+  
 
 
 
@@ -128,10 +190,10 @@ export default function EditProduct() {
         textonly={false}
         title={addProductDetails.heading}
         subtitle="Edit Product"
-        imgFile={addProductDetails.imageUrl}
-        price = {addProductDetails.price}
-        duration = {addProductDetails.duration}
-        season = {addProductDetails.season}
+        imgFile={addProductDetails?.imageUrl}
+        price = {addProductDetails?.price}
+        duration = {addProductDetails?.duration}
+        season = {addProductDetails?.season}
         isEdit={true}
       />
       <div className="addProduct_container">
@@ -147,7 +209,7 @@ export default function EditProduct() {
                   <select style={{width:"100%"}}
                     name="category"
                     id="TripCategory"
-                    value={addProductDetails.category}
+                    value={addProductDetails?.category}
                     onChange={onChangeInAddingData}
                   >
                             <option selected value="" disabled>Select an option</option>
@@ -160,6 +222,7 @@ export default function EditProduct() {
                         );
                       })}
                   </select>
+                  {categoryError.isError && categoryError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
                 
               </div>
@@ -174,9 +237,10 @@ export default function EditProduct() {
                     type="number"
                     placeholder="Days"
                     name="duration"
-                    value={addProductDetails.duration}
+                    value={addProductDetails?.duration}
                     onChange={onChangeInAddingData}
                   />
+                   {durationError.isError && durationError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
               </div>
 
@@ -190,8 +254,9 @@ export default function EditProduct() {
                     placeholder="Season"
                     name="season"
                     onChange={onChangeInAddingData}
-                    value={addProductDetails.season}
+                    value={addProductDetails?.season}
                   />
+                  {seasonError.isError && seasonError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
               </div>
 
@@ -203,9 +268,10 @@ export default function EditProduct() {
                   <input style={{display:"inline-block",width:"100%"}}
                     type="text"
                     name="heading"
-                    value={addProductDetails.heading}
+                    value={addProductDetails?.heading}
                     onChange={onChangeInAddingData}
                   />
+                   {headingError.isError && headingError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
                 
               
@@ -225,9 +291,10 @@ export default function EditProduct() {
                   <input style={{display:"inline-block",width:"100%"}}
                     placeholder="Price"
                     name="price"
-                    value={addProductDetails.price}
+                    value={addProductDetails?.price}
                     onChange={onChangeInAddingData}
                   />
+                  {priceError.isError && priceError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
                 </div>
               </div>
 
@@ -244,21 +311,14 @@ export default function EditProduct() {
                   type="text"
                   name="imageUrl"
 
-                  value={addProductDetails.imageUrl}
+                  value={addProductDetails?.imageUrl}
                   onChange={onChangeInAddingData}
                 />
+                {imageUrlError.isError && imageUrlError.message.map(a=> <p style={{color:"red"}}> {a}</p>)}
               </div>
             </div>
 
-            <div className="divFlex">
-             
-
-
-
-             
-
-             
-            </div>
+           
 
 
 

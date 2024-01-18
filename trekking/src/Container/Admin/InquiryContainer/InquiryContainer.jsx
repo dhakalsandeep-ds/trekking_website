@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./InquiryContainer.css";
 
-import BtnToClick from "../../../Components/BtnToClick/BtnToClick";
 import { MdRemoveRedEye, MdDelete } from "react-icons/md";
 
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import TitleAndData from "../../../Components/TitleAndData/TitleAndData";
-import {
-  deleteData,
-  getAllData,
-  updateData,
-} from "../../../constants/apiService";
+
 import { toast } from "react-toastify";
 
 
@@ -107,15 +99,6 @@ export default function InquiryContainer() {
          toast.error("something went wrong")
     }
 
-    // Delete the inquiry with the given ID
-    // try {
-    //   const response = await axios.delete(`/api/inquiries/${id}`);
-    //   console.log(response.data.message);
-    //   // Remove the deleted inquiry from the state
-    //   setInquiries((prevInquiries) => prevInquiries.filter((inquiry) => inquiry._id !== id));
-    // } catch (error) {
-    //   console.error('Error deleting inquiry:', error);
-    // }
   };
 
   return (

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Hero.css";
 import bgImg from "../../../../assets/mustang.jpg";
-import { MdCall, MdMail } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { getAllData } from "../../../../constants/apiService";
-import MediaIcon from "../../../../Components/MediaIcon/MediaIcon";
+
 
 export default function Hero() {
   const [contactData, setContactData] = useState({
@@ -15,10 +13,7 @@ export default function Hero() {
 
   const [socialMediaData, setSocialMediaData] = useState();
 
-  const scrollToSection = () => {
-    const section = document.getElementById("packageOffer");
-    section.scrollIntoView({ behavior: "smooth" });
-  };
+
 
   const fetchContactData = async () => {
     try {
